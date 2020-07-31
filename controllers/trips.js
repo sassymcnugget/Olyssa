@@ -1,4 +1,5 @@
 const Trip = require("../models/trips");
+const { response } = require("express");
 
 // const newView = (request, response) => {
 // 	response.render("new.ejs");
@@ -27,20 +28,19 @@ const index = (req, res) => {
 	// });
 };
 
-// const show = (request, response) => {
-// 	// render the show.ejs file in the response
-// 	Trip.findById(request.params.id, (err, foundTrip) => {
-// 		response.render("show.ejs", {
-// 			trip: foundTrip,
-// 		});
-// 	});
-// 	// NOTE: the render function will automatically look
-// 	//       for files by the name we provide in the 'views folder
-// };
+const show = (req, res) => {
+	res.render("trips/show.ejs")
+	// render the show.ejs file in the response
+	// Trip.findById(req.params.id, (err, foundTrip) => {
+	// 	res.render("show.ejs", {
+	// 		trip: foundTrip,
+	// 	});
+}
 
 module.exports = {
-	index
+	index, 
+	show
 	// new: newView,
 	// create,
-	// show,
+
 };

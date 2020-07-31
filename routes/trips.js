@@ -11,8 +11,8 @@ const tripController = require('../controllers/trips')
 // INDEX ROUTE - send all fruits in the response
 router.get('/', tripController.index)
 
-// // SHOW ROUTE - send a single fruit in the response
-// router.get('/:id', fruitsController.show)
+// SHOW ROUTE - send a single fruit in the response
+router.get('/:id', tripController.show)
 
 // // DELETE ROUTE - remove a single fruit from the array and redirect the user to index
 // router.delete('/:id', (request, response) => {
