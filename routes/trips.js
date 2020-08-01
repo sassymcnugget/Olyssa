@@ -15,11 +15,9 @@ router.get('/', tripController.index)
 router.get('/:id', tripController.show)
 
 // // DELETE ROUTE - remove a single fruit from the array and redirect the user to index
-// router.delete('/:id', (request, response) => {
-//     Fruit.findByIdAndDelete(request.params.id, (err, data) => {
-//         response.redirect('/fruits')
-//     })
-// })
+router.delete('/:id', tripController.removeTrip)
+
+
 // // EDIT ROUTE - show the user a page with a form they can use to edit a specific item
 // router.get('/:id/edit', (request, response) => {
 //     Fruit.findById(request.params.id, (err, foundFruit) => {

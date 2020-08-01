@@ -9,7 +9,7 @@ const sightseeingSchema = new mongoose.Schema({
 		latitude: Number, 
 		longitude: Number 
 	}, 
-	img: String, 
+	img: String
 	
 });
 

@@ -36,12 +36,24 @@ const show = async (req, res) => {
 		console.log(err)
 	}}
 
+const removeTrip = async(req, res) => {
+	try{
+
+		const deleteTrip = await Trip.findByIdAndDelete(req.params.id, (err, deleteTrip) =>{
+			res.redirect('/trips')
+		})
+	}
+	catch (err){
+		console.log(err)
+	}
+}
+
+
 module.exports = {
 	index, 
 	show,
 	create,  
-	newOne 
-	// new: newView,
-	// create,
-
+	newOne,
+	removeTrip
+	
 }

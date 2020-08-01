@@ -13,6 +13,8 @@
     <p> longitude : <%= trip.longitude %> <br/> </p>
         
         <img src="<%=trip.img%>" alt="Image" />
-   
+     <form action="/trips/<%=trip._id %>?_method=DELETE" method="POST"\>
+    <input type="submit" value="Delete TRIP"/>
+</form>
 </body>
 </html>
