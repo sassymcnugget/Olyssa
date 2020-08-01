@@ -1,46 +1,47 @@
 const Trip = require("../models/trips");
-const { response } = require("express");
+// const { response } = require("express");
 
-// const newView = (request, response) => {
-// 	response.render("new.ejs");
-// };
+const newOne = (req, res) => {
+	res.render("trips/new.ejs")
+}
 
-// const create = (request, response) => {
-// 	// request.body is an object that holds data sent from the form
-// 	// if (request.body.readyToEat === 'on') {
-// 	//     request.body.readyToEat = true
-// 	// } else {
-// 	//     request.body.readyToEat = false
-// 	// }
+const create = async (req, res) => {
+	try{
+		console.log(req.body) 
+		//create new var for whole object and see how you get it 
+		// object.location = req.body.latitude 
+		 const createdTrip = await Trip.create(req.body, (err, createdTrip) => {
+			console.log(createdTrip)
+			res.redirect("/trips")
+		})
+	} catch (err) {
+		console.log(err)
+	}} 
 
-// 	Trip.create(request.body, (err, createdTrip) => {
-// 		response.redirect("/trips");
-// 	});
-// };
-
-const index = (req, res) => {
-	res.render('home.ejs')
-	// Trip.find({}, (err, allTrips) => {
-		
-	// 	res.render("home.ejs", {
-	// 		trips: allTrips,
-	// 	});
-	// });
+const index = async (req, res) => {
+	
+	Trip.find({}, (err, allTrips) => {
+		res.render("home.ejs", {
+			trips: allTrips,
+		});
+	});
 };
 
-const show = (req, res) => {
-	res.render("trips/show.ejs")
-	// render the show.ejs file in the response
-	// Trip.findById(req.params.id, (err, foundTrip) => {
-	// 	res.render("show.ejs", {
-	// 		trip: foundTrip,
-	// 	});
-}
+const show = async (req, res) => {
+	try {
+		const foundTrip = await Trip.findById(req.params.id, (err, foundTrip) => {
+			res.render("trips/show.ejs", {trip: foundTrip})
+		})
+	} catch (err){
+		console.log(err)
+	}}
 
 module.exports = {
 	index, 
-	show
+	show,
+	create,  
+	newOne 
 	// new: newView,
 	// create,
 
-};
+}

@@ -7,5 +7,14 @@
 </head>
 <body>
     <h1>HEllo this is a TEST!! </h1>
+
+    <h2>List of Trips</h2>
+            <ul>
+                <% trips.forEach(trips => { %>
+                    <li>
+                    <a href="/trips/<%=trips._id%>"><%=trips.name%></a>
+                    </li>
+                <% }) %>
+            </ul>
 </body>
 </html>

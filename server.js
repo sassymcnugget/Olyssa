@@ -5,7 +5,7 @@ const methodOverride = require("method-override");
 const app = express();
 
 // database connection
-const connectionString = "mongodb://localhost/olyssa";
+const connectionString = "mongodb+srv://olb:olga22@cluster0.wif1u.mongodb.net/olyssa?retryWrites=true&w=majority";
 
 mongoose.connect(connectionString, {
 	useNewUrlParser: true,

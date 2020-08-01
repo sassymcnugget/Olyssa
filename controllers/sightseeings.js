@@ -1,7 +1,6 @@
 const Sightseeing = require("../models/sightseeings");
 
 
-
 // const newView = (request, response) => {
 // 	response.render("new.ejs");
 // };

@@ -3,10 +3,10 @@ const router = express.Router()
 const tripController = require('../controllers/trips')
 
 // // NEW ROUTE - send the user to the new fruit form page
-// router.get('/new', fruitsController.new)
+router.get('/new', tripController.newOne)
 
-// // CREATE ROUTE - will create a new fruit with data from the form
-// router.post('/', fruitsController.create)
+// CREATE ROUTE - will create a new fruit with data from the form
+router.post('/', tripController.create)
 
 // INDEX ROUTE - send all fruits in the response
 router.get('/', tripController.index)
