@@ -1,17 +1,26 @@
 const mongoose = require("mongoose");
-const Article = require("./article");
+const Sightseeing = require("./sightseeings");
 
-const authorSchema = new mongoose.Schema({
+const tripSchema = new mongoose.Schema({
 	name: String,
+	address: String,
+	//!!!!!!!!! NOT sure if this supposed to be an array or objects 
+	// latitude: Number, 
+	// longitude: Number, 
+	// coordinates: {
+	// 	type: [Number],
+	// 	index: '2dsphere'
+	//   },
+	img: String, 
 	// creating a relationship through a reference
-	articles: [
+	sightseeing: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Article",
+			ref: "Sightseeing",
 		},
 	],
 });
 
-const Author = mongoose.model("Author", authorSchema);
+const Trip = mongoose.model("Trip", tripSchema);
 
-module.exports = Author;
+module.exports = Trip;
