@@ -2,12 +2,13 @@ const Trip = require("../models/trips")
 const Sightseeing = require("../models/sightseeings")
 
 
-//route to create new trip at '/trips/new/'
+//Path to '/trips/new/'
 const newOne = (req, res) => {
 	res.render("trips/new.ejs")
 }
 
-const create = async (req, res) => {
+//create and save trip at '/trips/new/'
+const createTrip = async (req, res) => {
 	try{
 		console.log(req.body) 
 		//create new var for whole object and see how you get it 
@@ -21,6 +22,7 @@ const create = async (req, res) => {
 		console.log(err)
 	}} 
 
+//Path to /trips - Homepage 
 const index = async (req, res) => {
 	Trip.find({}, (err, allTrips) => {
 		res.render("home.ejs", {
@@ -29,18 +31,23 @@ const index = async (req, res) => {
 	});
 };
 
+//Path to individual trip show page('/trip/id') - retrieves data from Trips, Sightseeing models 
+//to show sights for each trip
 const show = async (req, res) => {
-	try {
-		
-		const foundTrip = await Trip.findById(req.params.id, (err, foundTrip) => {
-			res.render("trips/show.ejs", {
-				trip: foundTrip, 
-				sightseeing: foundTrip.sightseeing})
+	Trip.findById(req.params.id)
+		.populate('sightseeing')
+        .exec((err, foundTrip ) => {
+            if(err) {
+                res.send(err)
+            } else {
+                res.render('trips/show.ejs', {
+                    trip: foundTrip, 
+                    sightseeing: foundTrip.sightseeing
+                })
+			}
 		})
-	} catch (err){
-		console.log(err)
-	}}
-
+	}
+// Delete Trip on show page 
 const removeTrip = async(req, res) => {
 	try{
 		const deleteTrip = await Trip.findByIdAndDelete(req.params.id, (err, deleteTrip) =>{
@@ -52,7 +59,7 @@ const removeTrip = async(req, res) => {
 	}
 }
 
-///Create a new sightseeing on Trips page 
+///Create a new sightseeing on Trips show page ('/trip/id')
 const createTripsSight = async(req, res) => {
 	try{
 		const createdSight = await Sightseeing.create(req.body) 
@@ -62,17 +69,16 @@ const createTripsSight = async(req, res) => {
 				res.redirect(`/trips/${ req.params.id }`)
 			})
 		}) 	
-		}
+	}
 	catch (err){
 		console.log(err)  
 	}
 } 
 
-
 module.exports = {
 	index, 
 	show,
-	create,  
+	createTrip,  
 	newOne,
 	removeTrip, 
 	createTripsSight
