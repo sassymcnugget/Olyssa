@@ -6,7 +6,7 @@ const tripController = require('../controllers/trips')
 router.get('/new', tripController.newOne)
 
 // CREATE ROUTE - will create a new fruit with data from the form
-router.post('/', tripController.create)
+router.post('/', tripController.createTrip)
 
 // INDEX ROUTE - send all fruits in the response
 router.get('/', tripController.index)
