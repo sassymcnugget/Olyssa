@@ -6,7 +6,7 @@ const app = express();
 
 // database connection
 //const connectionString = "mongodb+srv://olb:olga22@cluster0.wif1u.mongodb.net/olyssa?retryWrites=true&w=majority";
-const connectionString = 'mongodb://localhost/project2'
+const connectionString = "mongodb://localhost/project2";
 
 mongoose.connect(connectionString, {
 	useNewUrlParser: true,
@@ -29,12 +29,18 @@ app.use(methodOverride("_method"));
 // parse incoming data into a JS object attached to the request
 app.use(express.urlencoded({ extended: false }));
 
+// set location from which to pull static files
+app.use(express.static("static"));
+
 // routes
 const tripsRouter = require("./routes/trips.js");
 app.use("/trips", tripsRouter);
 
 const sightseeingsRouter = require("./routes/sightseeings.js");
 app.use("/sightseeings", sightseeingsRouter);
+
+const mapRouter = require("./routes/map.js");
+app.use("/map", mapRouter);
 
 // listening
 app.listen(3000, () => {
