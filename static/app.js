@@ -1,58 +1,97 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-let map;
-let service;
-let infowindow;
-
-//google.maps.event.addDomListeneer(window, "load", initMap());
 
 function initMap() {
-	const sydney = new google.maps.LatLng(-33.867, 151.195);
-	infowindow = new google.maps.InfoWindow();
-	map = new google.maps.Map(document.getElementById("map"), {
-		center: sydney,
-		zoom: 15,
+	var map = new google.maps.Map(document.getElementById("map"), {
+		center: { lat: -33.8688, lng: 151.2195 },
+		zoom: 13,
+	});
+	var card = document.getElementById("pac-card");
+	var input = document.getElementById("pac-input");
+	var types = document.getElementById("type-selector");
+	var strictBounds = document.getElementById("strict-bounds-selector");
+
+	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+	var autocomplete = new google.maps.places.Autocomplete(input);
+
+	// Bind the map's bounds (viewport) property to the autocomplete object,
+	// so that the autocomplete requests use the current map bounds for the
+	// bounds option in the request.
+	autocomplete.bindTo("bounds", map);
+
+	// Set the data fields to return when the user selects a place.
+	autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+
+	var infowindow = new google.maps.InfoWindow();
+	var infowindowContent = document.getElementById("infowindow-content");
+	infowindow.setContent(infowindowContent);
+	var marker = new google.maps.Marker({
+		map: map,
+		anchorPoint: new google.maps.Point(0, -29),
 	});
 
-	const request = {
-		query: "chuck e cheese",
-		fields: ["name", "geometry"],
-	};
-	service = new google.maps.places.PlacesService(map);
-	service.findPlaceFromQuery(request, (results, status) => {
-		if (status === google.maps.places.PlacesServiceStatus.OK) {
-			for (let i = 0; i < results.length; i++) {
-				createMarker(results[i]);
-			}
-			map.setCenter(results[0].geometry.location);
+	autocomplete.addListener("place_changed", function () {
+		infowindow.close();
+		marker.setVisible(false);
+		var place = autocomplete.getPlace();
+		if (!place.geometry) {
+			// User entered the name of a Place that was not suggested and
+			// pressed the Enter key, or the Place Details request failed.
+			window.alert("No details available for input: '" + place.name + "'");
+			return;
 		}
+
+		// If the place has a geometry, then present it on a map.
+		if (place.geometry.viewport) {
+			map.fitBounds(place.geometry.viewport);
+		} else {
+			map.setCenter(place.geometry.location);
+			map.setZoom(17); // Why 17? Because it looks good.
+		}
+		marker.setPosition(place.geometry.location);
+		marker.setVisible(true);
+
+		var address = "";
+		if (place.address_components) {
+			address = [
+				(place.address_components[0] &&
+					place.address_components[0].short_name) ||
+					"",
+				(place.address_components[1] &&
+					place.address_components[1].short_name) ||
+					"",
+				(place.address_components[2] &&
+					place.address_components[2].short_name) ||
+					"",
+			].join(" ");
+		}
+
+		infowindowContent.children["place-icon"].src = place.icon;
+		infowindowContent.children["place-name"].textContent = place.name;
+		infowindowContent.children["place-address"].textContent = address;
+		infowindow.open(map, marker);
 	});
 
-	createPlaceAutoComplete();
-}
+	// Sets a listener on a radio button to change the filter type on Places
+	// Autocomplete.
+	function setupClickListener(id, types) {
+		var radioButton = document.getElementById(id);
+		radioButton.addEventListener("click", function () {
+			autocomplete.setTypes(types);
+		});
+	}
 
-function createPlaceAutoComplete() {
-	let defaultBounds = new google.maps.LatLngBounds(
-		new google.maps.LatLng(-33.8902, 151.1759),
-		new google.maps.LatLng(-33.8474, 151.2631)
-	);
+	setupClickListener("changetype-all", []);
+	setupClickListener("changetype-address", ["address"]);
+	setupClickListener("changetype-establishment", ["establishment"]);
+	setupClickListener("changetype-geocode", ["geocode"]);
 
-	let options = { bounds: defaultBounds };
-
-	let input = document.getElementById("pac-input");
-	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-	autocomplete = new google.maps.places.Autocomplete(input, {});
-}
-
-function createMarker(place) {
-	const marker = new google.maps.Marker({
-		map,
-		position: place.geometry.location,
-	});
-	google.maps.event.addListener(marker, "click", () => {
-		infowindow.setContent(place.name);
-		infowindow.open(map);
-	});
+	document
+		.getElementById("use-strict-bounds")
+		.addEventListener("click", function () {
+			console.log("Checkbox clicked! New state=" + this.checked);
+			autocomplete.setOptions({ strictBounds: this.checked });
+		});
 }
