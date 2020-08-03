@@ -5,6 +5,8 @@ let map;
 let service;
 let infowindow;
 
+//google.maps.event.addDomListeneer(window, "load", initMap());
+
 function initMap() {
 	const sydney = new google.maps.LatLng(-33.867, 151.195);
 	infowindow = new google.maps.InfoWindow();
@@ -12,6 +14,7 @@ function initMap() {
 		center: sydney,
 		zoom: 15,
 	});
+
 	const request = {
 		query: "chuck e cheese",
 		fields: ["name", "geometry"],
@@ -25,6 +28,22 @@ function initMap() {
 			map.setCenter(results[0].geometry.location);
 		}
 	});
+
+	createPlaceAutoComplete();
+}
+
+function createPlaceAutoComplete() {
+	let defaultBounds = new google.maps.LatLngBounds(
+		new google.maps.LatLng(-33.8902, 151.1759),
+		new google.maps.LatLng(-33.8474, 151.2631)
+	);
+
+	let options = { bounds: defaultBounds };
+
+	let input = document.getElementById("pac-input");
+	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+	autocomplete = new google.maps.places.Autocomplete(input, {});
 }
 
 function createMarker(place) {
