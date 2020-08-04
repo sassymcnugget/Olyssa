@@ -7,7 +7,10 @@
 </head>
 <body> 
     <div>
-         <a href="/login/logout"> Logout </a>
+        <a href="/users/signup"> Sign Up </a>
+   </div>
+    <div>
+         <a href="/users/logout"> Logout </a>
     </div>
     <div>
          <a href="/trips"> Home </a>
@@ -15,6 +18,23 @@
     <div>
          <a href="/trips/new"> New Trip </a>
     </div>
+
+         <!-- USER login form  -->
+         <main>
+            <section> 
+                <form action="/users/login" method="POST">
+                    <div>
+                    <label for="username "> Username: </label>
+                     <input type="text" name="username">
+                    </div>
+                    <div>
+                        <label for="password "> Password: </label>
+                        <input type="password" name="password">
+                    </div>
+                    <input type="submit" value="LOGIN">
+            </form>
+            </section>
+        </main>
     <h1> Show page for TRIPS </h1>
     <p> name : <%= trip.name %> <br/> </p>
     <p> address : <%= trip.address %> <br/> </p>

@@ -51,7 +51,7 @@ const mapRouter = require("./routes/map.js")
 app.use("/map", mapRouter)
 
 const userRouter = require("./routes/users.js")
-app.use("/login", userRouter)
+app.use("/users", userRouter)
 
 // listening
 app.listen(3000, () => {

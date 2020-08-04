@@ -20,8 +20,24 @@ const logout = (req, res) => {
     })
 }
 
+//Path to '/users/signup/'
+const newUser = (req, res) => {
+	res.render("users/new.ejs")
+}
+
+//create and save user '/users/signup'
+const createUser = async (req, res) => {
+	try{
+		 const createUser = await User.create(req.body, (err, createdUser) => {
+			res.redirect("/trips")
+		})
+	} catch (err) {
+		console.log(err)
+    }} 
 
 module.exports = {
     login, 
-    logout
+    logout,
+    newUser,
+    createUser
 }

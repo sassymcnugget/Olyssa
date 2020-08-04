@@ -1,11 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const userController = require('../controllers/sessions')
+const userController = require('../controllers/users')
 
 //destroy the seesion when user click on 'logout' link 
 router.get('/logout', userController.logout)
 
+router.get('/signup', userController.newUser)
 
-router.post('/', userController.login)
+router.post('/signup', userController.createUser)
 
-module.exports = router
+router.post('/login', userController.login)
+
+module.exports = router 
