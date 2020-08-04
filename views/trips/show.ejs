@@ -7,49 +7,49 @@
 </head>
 <body> 
     <h1> Show page for TRIPS </h1>
-    
     <p> name : <%= trip.name %> <br/> </p>
     <p> address : <%= trip.address %> <br/> </p>
     <p> latitude : <%= trip.latitude %> <br/> </p>
     <p> longitude : <%= trip.longitude %> <br/> </p>
-        
-        <img src="<%=trip.img%>" alt="Image" />
+    <img src="<%=trip.img%>" alt="Image" />
 
-        <!-- DELETE TRIP  -->
-     <form action="/trips/<%=trip._id %>?_method=DELETE" method="POST"\>
-    <input type="submit" value="Delete TRIP"/>
+     <!-- DELETE TRIP  -->
+     <form action="/trips/<%=trip._id %>?_method=DELETE" method="POST">
+     <input type="submit" value="Delete TRIP"/> </form>
    
     <!-- Add the sightseeing for each city / trip  -->
 
         <h1> Add new sightseeing for your selected TRIP </h1>
+        <br>
+        <form action="/sightseeings" method="POST">
+            <!-- passing a hidden value of trip.ID   -->
+            <input type="hidden" name="tripId" value="<%=trip._id %>"/> 
 
-        <form action="/trips/<%=trip._id%>" method="POST">
-                
             name : <input type="text" name="name" /><br/>
             address : <input type="text" name="address" /><br/>
-            
             img: <input type="text" name="img"><br/>
             <input type="submit" value="ADD SIGHTSEEING to your TRIP"/>
-        
+        </form>
+        <!-- Display the sightseeings trip  -->
         <section>
         <div>
             <h2>Checkout the list of sightseeings for <%= trip.name %> </h2>
             <% sightseeing.forEach((sightseeing, index)  => { %>
                 <ul>
                     <li>
-                        <p> address : <%= index %> <br/> </p>
                         <p> name : <%= sightseeing.name %> <br/> </p>
                         <p> address : <%= sightseeing.address %> <br/> </p>
-                        
                         <img src="<%=sightseeing.img%>" alt="Image" />
+
+                        <!-- DELETE Button for Sightseeing -->
+                        <form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
+                        <input type="submit" value="Delete this sightseeing"/> 
+                    </form>
+                    <br/>
                     </li>
                 </ul>
-   <% }) %> 
-
-       
+            <% }) %>
         </div>
     </section>
-
-</form>
 </body>
 </html>
