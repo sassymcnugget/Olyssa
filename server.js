@@ -41,14 +41,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("static"));
 
 // routes
-const tripsRouter = require("./routes/trips.js");
-app.use("/trips", tripsRouter);
+const tripsRouter = require("./routes/trips.js")
+app.use("/trips", tripsRouter)
 
-const sightseeingsRouter = require("./routes/sightseeings.js");
+const sightseeingsRouter = require("./routes/sightseeings.js")
 app.use("/sightseeings", sightseeingsRouter);
 
-const mapRouter = require("./routes/map.js");
-app.use("/map", mapRouter);
+const mapRouter = require("./routes/map.js")
+app.use("/map", mapRouter)
+
+const userRouter = require("./routes/users.js")
+app.use("/login", userRouter)
 
 // listening
 app.listen(3000, () => {
