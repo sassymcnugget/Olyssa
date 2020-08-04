@@ -2,19 +2,22 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+let map;
+let markers = [];
+
 function initMap() {
-	var map = new google.maps.Map(document.getElementById("map"), {
+	map = new google.maps.Map(document.getElementById("map"), {
 		center: { lat: -33.8688, lng: 151.2195 },
 		zoom: 13,
 	});
-	var card = document.getElementById("pac-card");
-	var input = document.getElementById("pac-input");
-	var types = document.getElementById("type-selector");
-	var strictBounds = document.getElementById("strict-bounds-selector");
+	let card = document.getElementById("pac-card");
+	let input = document.getElementById("pac-input");
+	let types = document.getElementById("type-selector");
+	let strictBounds = document.getElementById("strict-bounds-selector");
 
 	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-	var autocomplete = new google.maps.places.Autocomplete(input);
+	let autocomplete = new google.maps.places.Autocomplete(input);
 
 	// Bind the map's bounds (viewport) property to the autocomplete object,
 	// so that the autocomplete requests use the current map bounds for the
@@ -24,18 +27,18 @@ function initMap() {
 	// Set the data fields to return when the user selects a place.
 	autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
 
-	var infowindow = new google.maps.InfoWindow();
-	var infowindowContent = document.getElementById("infowindow-content");
+	let infowindow = new google.maps.InfoWindow();
+	let infowindowContent = document.getElementById("infowindow-content");
 	infowindow.setContent(infowindowContent);
-	var marker = new google.maps.Marker({
-		map: map,
-		anchorPoint: new google.maps.Point(0, -29),
-	});
+	// let marker = new google.maps.Marker({
+	// 	map: map,
+	// 	anchorPoint: new google.maps.Point(0, -29),
+	// });
 
 	autocomplete.addListener("place_changed", function () {
 		infowindow.close();
-		marker.setVisible(false);
-		var place = autocomplete.getPlace();
+		// marker.setVisible(false);
+		let place = autocomplete.getPlace();
 		if (!place.geometry) {
 			// User entered the name of a Place that was not suggested and
 			// pressed the Enter key, or the Place Details request failed.
@@ -50,10 +53,12 @@ function initMap() {
 			map.setCenter(place.geometry.location);
 			map.setZoom(17); // Why 17? Because it looks good.
 		}
-		marker.setPosition(place.geometry.location);
-		marker.setVisible(true);
+		//marker.setPosition(place.geometry.location);
+		console.log("Spot: " + place.geometry.location);
+		//marker.setVisible(true);
+		addMarker(place.geometry.location);
 
-		var address = "";
+		let address = "";
 		if (place.address_components) {
 			address = [
 				(place.address_components[0] &&
@@ -77,7 +82,7 @@ function initMap() {
 	// Sets a listener on a radio button to change the filter type on Places
 	// Autocomplete.
 	function setupClickListener(id, types) {
-		var radioButton = document.getElementById(id);
+		let radioButton = document.getElementById(id);
 		radioButton.addEventListener("click", function () {
 			autocomplete.setTypes(types);
 		});
@@ -94,4 +99,43 @@ function initMap() {
 			console.log("Checkbox clicked! New state=" + this.checked);
 			autocomplete.setOptions({ strictBounds: this.checked });
 		});
+
+	map.addListener("click", (event) => {
+		addMarker(event.latLng);
+	});
+}
+
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+	const marker = new google.maps.Marker({
+		position: location,
+		map: map,
+	});
+
+	markers.push(marker);
+
+	return marker;
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+	for (let i = 0; i < markers.length; i++) {
+		markers[i].setMap(map);
+	}
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+	setMapOnAll(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+	setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+	clearMarkers();
+	markers = [];
 }
