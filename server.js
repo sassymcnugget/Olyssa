@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const session = require('express-session')
 const app = express();
 
 // database connection
@@ -24,6 +25,13 @@ mongoose.connection.on("disconnected", () =>
 mongoose.connection.on("error", (err) => console.log("Mongoose error", err));
 
 //middleware
+//User session 
+app.use(session({
+	secret: "Olyssa", 
+	resave: false, 
+	saveUninitialized: false
+}))
+
 app.use(methodOverride("_method"));
 
 // parse incoming data into a JS object attached to the request

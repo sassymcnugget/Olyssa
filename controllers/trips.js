@@ -19,6 +19,7 @@ const createTrip = async (req, res) => {
 //Path to /trips - Homepage 
 const index = async (req, res) => {
 	Trip.find({}, (err, allTrips) => {
+		console.log(req.session)
 		res.render("home.ejs", {
 			trips: allTrips,
 		})
