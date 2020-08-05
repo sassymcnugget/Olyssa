@@ -47,3 +47,26 @@ function addToTrip(place) {
 
 	tripArray.push(place);
 }
+
+//function that has the following: name: lat: lon:
+
+{
+	/* <section>
+        <div>
+            <h2>Checkout the list of sightseeings for <%= trip.name %> </h2>
+            <% sightseeing.forEach((sightseeing, index)  => { %>
+                <ul>
+                    <li>
+                        <p> name : <%= sightseeing.name %> <br/> </p>
+                        <p> address : <%= sightseeing.address %> <br/> </p>
+                        <img src="<%=sightseeing.img%>" alt="Image" /> 
+                        <!-- DELETE Button for Sightseeing -->
+                        <form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
+                        <input type="submit" value="Delete this sightseeing"/> 
+                    </form>
+                    <br/>
+                    </li>
+                </ul>
+            <% }) %>
+        </div> */
+}
