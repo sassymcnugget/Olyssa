@@ -54,15 +54,33 @@ function addToTrip(place) {
 // get the sightseeings.lat ,  sightseeings.long  and place them as a Points on the map
 
 function addSightSeeingMarkers() {
-	for (i = 0; i < sightseeing.length; i++) {
-		const marker = new google.maps.Marker({
-			name: sightseeing[i].name,
-			positon: {
-				lat: sightseeing[i].lat,
-				long: sightseeing[i].long,
-			},
-			map: map,
+	return fetch("/trips/api/" + tripId)
+		.then((data) => {
+			console.log(data);
+			return data.json();
+		})
+		.then((tripData) => {
+			console.log(tripData);
+			for (i = 0; i < tripData.sightseeing.length; i++) {
+				const marker = new google.maps.Marker({
+					name: tripData.sightseeing[i].name,
+					position: new google.maps.LatLng(
+						tripData.sightseeing[i].lat,
+						tripData.sightseeing[i].lng
+					),
+					map: map,
+				});
+				markers.push(marker);
+			}
 		});
-		markers.push(marker);
-	}
+}
+
+//new function
+//purpose saves sightseeings to database
+function sightMarker(place) {
+	fetch("/trips/api/", {
+		//post method
+		//body attribute (place)
+		//content type header (check docs)
+	});
 }

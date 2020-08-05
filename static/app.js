@@ -4,7 +4,7 @@ let markers = [];
 let infoWindow;
 let infowindowContent;
 
-function initMap() {
+async function initMap() {
 	map = new google.maps.Map(document.getElementById("map"), {
 		center: { lat: Number(lattitude), lng: Number(longtitude) }, //these variables are being passed from trips.js 'show' function
 		zoom: 13,
@@ -43,7 +43,7 @@ function initMap() {
 		addToTrip(place);
 	});
 
-	//addSightSeeingMarkers();
+	await addSightSeeingMarkers();
 
 	// Sets a listener on a radio button to change the filter type on Places
 	// Autocomplete.
