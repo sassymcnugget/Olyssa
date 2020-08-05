@@ -125,7 +125,6 @@ li a:hover:not(.active) {
 	color: white;
 }
 
-/* Change the link color on hover */
 li a:hover {
 	background-color: #265528;
 	color: white;

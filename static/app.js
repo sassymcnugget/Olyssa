@@ -1,6 +1,9 @@
 let map;
 let markers = [];
 
+let infoWindow;
+let infowindowContent;
+
 function initMap() {
 	map = new google.maps.Map(document.getElementById("map"), {
 		center: { lat: -33.8688, lng: 151.2195 },
@@ -23,14 +26,15 @@ function initMap() {
 	// Set the data fields to return when the user selects a place.
 	autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
 
-	let infowindow = new google.maps.InfoWindow();
-	let infowindowContent = document.getElementById("infowindow-content");
+	infowindow = new google.maps.InfoWindow();
+	infowindowContent = document.getElementById("infowindow-content");
 	infowindow.setContent(infowindowContent);
 
 	autocomplete.addListener("place_changed", function () {
 		infowindow.close();
 		let place = autocomplete.getPlace();
 		focusPlace(place);
+		addToTrip(place);
 	});
 
 	// Sets a listener on a radio button to change the filter type on Places
