@@ -22,12 +22,14 @@ const index = async (req, res) => {
 		console.log(req.session)
 		res.render("home.ejs", {
 			trips: allTrips,
+			
 		})
 	})
 }
 
 //Path to the Show page 
 const show = (req, res) => {
+	
 	Trip.findById(req.params.id)
 		.populate('sightseeing')
         .exec((err, foundTrip ) => {
@@ -37,6 +39,7 @@ const show = (req, res) => {
                 res.render('trips/show.ejs', {
                     trip: foundTrip, 
 					sightseeing: foundTrip.sightseeing
+					
 				})
 			}
 		})

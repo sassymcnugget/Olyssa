@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Document</title>
 </head>
+
+
 <body> 
     <div>
         <a href="/users/signup"> Sign Up </a>
@@ -38,8 +41,8 @@
     <h1> Show page for TRIPS </h1>
     <p> name : <%= trip.name %> <br/> </p>
     <p> address : <%= trip.address %> <br/> </p>
-    <p> latitude : <%= trip.latitude %> <br/> </p>
-    <p> longitude : <%= trip.longitude %> <br/> </p>
+    <p> latitude : <%= trip.lat %> <br/> </p>
+    <p> longitude : <%= trip.lng %> <br/> </p>
     <img src="<%=trip.img%>" alt="Image" />
 
      <!-- DELETE TRIP  -->

@@ -4,6 +4,8 @@ const Sightseeing = require("./sightseeings");
 const tripSchema = new mongoose.Schema({
 	name: String,
 	address: String,
+	lat: Number, 
+	lng: Number, 
 	//!!!!!!!!! NOT sure if this supposed to be an array or objects 
 	// latitude: Number, 
 	// longitude: Number, 
