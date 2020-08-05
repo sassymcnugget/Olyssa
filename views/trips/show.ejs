@@ -1,17 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body> 
-    <h1> Show page for TRIPS </h1>
+<html>
+	<head>
+		<title>Place Searches</title>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiTRmQpKXDj6e2BZMi0kOfqY7ZQTih8qs&callback=initMap&libraries=places&v=weekly"
+			defer >
+    </script>
+         <link rel="stylesheet" type="text/css" href="/styles/style.css" /> 
+		<script src="/app.js"></script>
+		<script>
+			const longtitude = "<%- longtitude %>" //these variables are being passed from trips.js 'show' function 
+			const  lattitude = "<%- lattitude %>"
+			console.log(longtitude, lattitude)
+		</script>
+	</head>
+	<body>
+		<nav id="navigation">
+			<div>
+				<a href="/users/signup"> Sign Up </a>
+		   </div>
+			<div>
+				 <a href="/users/logout"> Logout </a>
+			</div>
+			<div>
+				 <a href="/trips"> Home </a>
+			</div>
+			<div>
+				 <a href="/trips/new"> New Trip </a>
+				 <main>
+					<section> 
+						<form action="/users/login" method="POST">
+							<div>
+							<label for="username "> Username: </label>
+							 <input type="text" name="username">
+							</div>
+							<div>
+								<label for="password "> Password: </label>
+								<input type="password" name="password">
+							</div>
+							<input type="submit" value="LOGIN">
+					</form>
+					</section>
+			</div>
+		</nav>
+		<div id="sights">
+			<h1> Show page for TRIPS </h1>
     <p> name : <%= trip.name %> <br/> </p>
     <p> address : <%= trip.address %> <br/> </p>
-    <p> latitude : <%= trip.latitude %> <br/> </p>
-    <p> longitude : <%= trip.longitude %> <br/> </p>
-    <img src="<%=trip.img%>" alt="Image" />
 
      <!-- DELETE TRIP  -->
      <form action="/trips/<%=trip._id %>?_method=DELETE" method="POST">
@@ -39,7 +75,7 @@
                     <li>
                         <p> name : <%= sightseeing.name %> <br/> </p>
                         <p> address : <%= sightseeing.address %> <br/> </p>
-                        <img src="<%=sightseeing.img%>" alt="Image" />
+                        <img src="<%=sightseeing.img%>" alt="Image" /> 
 
                         <!-- DELETE Button for Sightseeing -->
                         <form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
@@ -50,6 +86,44 @@
                 </ul>
             <% }) %>
         </div>
-    </section>
-</body>
+		</div>
+		<div class="pac-card" id="pac-card">
+			<div>
+				<div id="title">
+					Autocomplete search
+				</div>
+				<div id="type-selector" class="pac-controls">
+					<input
+						type="radio"
+						name="type"
+						id="changetype-all"
+						checked="checked"
+					/>
+					<label for="changetype-all">All</label>
+
+					<input type="radio" name="type" id="changetype-establishment" />
+					<label for="changetype-establishment">Establishments</label>
+
+					<input type="radio" name="type" id="changetype-address" />
+					<label for="changetype-address">Addresses</label>
+
+					<input type="radio" name="type" id="changetype-geocode" />
+					<label for="changetype-geocode">Geocodes</label>
+				</div>
+				<div id="strict-bounds-selector" class="pac-controls">
+					<input type="checkbox" id="use-strict-bounds" value="" />
+					<label for="use-strict-bounds">Strict Bounds</label>
+				</div>
+			</div>
+			<div id="pac-container">
+				<input id="pac-input" type="text" placeholder="Enter a location" />
+			</div>
+		</div>
+		<div id="map"></div>
+		<div id="infowindow-content">
+			<img src="" width="16" height="16" id="place-icon" />
+			<span id="place-name" class="title"></span><br />
+			<span id="place-address"></span>
+		</div>
+	</body>
 </html>
