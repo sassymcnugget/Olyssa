@@ -48,7 +48,7 @@ function addToTrip(place) {
 	tripArray.push(place);
 }
 
-//function that has the following: name: lat: lon: image:
+//function that has the following: name: lat: lon:
 
 {
 	/* <section>
