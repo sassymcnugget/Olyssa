@@ -37,14 +37,13 @@ const show = (req, res) => {
             if(err) {
                 res.send(err)
             } else {
+				console.log(foundTrip.sightseeing)
                 res.render('trips/show.ejs', {
                     trip: foundTrip, 
 					sightseeing: foundTrip.sightseeing,
 					longtitude: foundTrip.lng,  // longtitude, lattitude variables are being passed to app.js as hidden variables in show.ejs 
 					lattitude: foundTrip.lat
-					
 				})
-
 			}
 		})
 	}
