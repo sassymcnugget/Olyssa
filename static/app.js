@@ -5,10 +5,9 @@
 let map;
 let markers = [];
 
-
 function initMap() {
 	map = new google.maps.Map(document.getElementById("map"), {
-		center: { lat: -33.8688, lng: 151.2195 },
+		center: {lat: Number(lattitude), lng: Number(longtitude)},
 		zoom: 13,
 	});
 	let card = document.getElementById("pac-card");

@@ -1,6 +1,7 @@
 const Trip = require("../models/trips")
 const Sightseeing = require("../models/sightseeings")
 
+
 //Path to '/trips/new/'
 const newOne = (req, res) => {
 	res.render("trips/new.ejs")
@@ -38,9 +39,12 @@ const show = (req, res) => {
             } else {
                 res.render('trips/show.ejs', {
                     trip: foundTrip, 
-					sightseeing: foundTrip.sightseeing
+					sightseeing: foundTrip.sightseeing,
+					longtitude: foundTrip.lng, 
+					lattitude: foundTrip.lat
 					
 				})
+
 			}
 		})
 	}

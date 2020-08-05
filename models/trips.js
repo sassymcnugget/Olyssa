@@ -4,17 +4,15 @@ const Sightseeing = require("./sightseeings");
 const tripSchema = new mongoose.Schema({
 	name: String,
 	address: String,
-	lat: Number, 
 	lng: Number, 
-	//!!!!!!!!! NOT sure if this supposed to be an array or objects 
-	// latitude: Number, 
-	// longitude: Number, 
+	lat: Number, 
+	
 	// coordinates: {
 	// 	type: [Number],
 	// 	index: '2dsphere'
 	//   },
 	img: String, 
-	// creating a relationship through a reference
+	
 	sightseeing: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
