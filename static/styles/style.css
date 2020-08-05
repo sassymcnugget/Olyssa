@@ -88,6 +88,47 @@ body {
 	top: 0;
 	height: 10%;
 	width: 100%;
+	text-align: center;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: larger;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background-color: #2f9b32;
+	color: white;
+}
+
+li a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+li {
+	display: block;
+	float: left;
+	color: white;
+}
+
+li a.active {
+	background-color: #4caf50;
+	color: white;
+}
+
+li a:hover:not(.active) {
+	background-color: #39823b;
+	color: white;
+}
+
+/* Change the link color on hover */
+li a:hover {
+	background-color: #265528;
+	color: white;
 }
 
 #sights {

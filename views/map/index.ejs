@@ -11,7 +11,15 @@
 		<script src="/app.js"></script>
 	</head>
 	<body>
-		<nav id="navigation"></nav>
+		<nav id="navigation">
+			<ul>
+				<li><a class="active" href="map.ejs">MAP TEST</a></li>
+				<li><a href="login.ejs">Login</a></li>
+				<li><a href="index.ejs">Home</a></li>
+				<li><a href="new.ejs">New</a></li>
+				<li><a href="about.html">About</a></li>
+			</ul>
+		</nav>
 		<div id="sights"></div>
 		<div class="pac-card" id="pac-card">
 			<div>
@@ -50,6 +58,7 @@
 			<img src="" width="16" height="16" id="place-icon" />
 			<span id="place-name" class="title"></span><br />
 			<span id="place-address"></span>
+			<div id="place-content"></div>
 		</div>
 	</body>
 </html>
