@@ -39,7 +39,7 @@ function deleteMarkers() {
 //function that allows us to add sights to trip
 function addToTrip(place) {
 	let placeDiv = document.createElement("div");
-	placeDiv.innerHTML = "A Place";
+	placeDiv.innerHTML = place.name;
 	placeDiv.classList.add("card", "p-2", "rounded-0");
 
 	let tripPanel = document.querySelector("#trip-panel");
