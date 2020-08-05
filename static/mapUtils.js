@@ -1,3 +1,5 @@
+//const sightseeings = require("../controllers/sightseeings");
+
 //temporary array to contain map information
 let tripArray = [];
 
@@ -48,25 +50,19 @@ function addToTrip(place) {
 	tripArray.push(place);
 }
 
-//function that has the following: name: lat: lon:
+// need to iterate over the array of sightseeings
+// get the sightseeings.lat ,  sightseeings.long  and place them as a Points on the map
 
-{
-	/* <section>
-        <div>
-            <h2>Checkout the list of sightseeings for <%= trip.name %> </h2>
-            <% sightseeing.forEach((sightseeing, index)  => { %>
-                <ul>
-                    <li>
-                        <p> name : <%= sightseeing.name %> <br/> </p>
-                        <p> address : <%= sightseeing.address %> <br/> </p>
-                        <img src="<%=sightseeing.img%>" alt="Image" /> 
-                        <!-- DELETE Button for Sightseeing -->
-                        <form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
-                        <input type="submit" value="Delete this sightseeing"/> 
-                    </form>
-                    <br/>
-                    </li>
-                </ul>
-            <% }) %>
-        </div> */
+function addSightSeeingMarkers() {
+	for (i = 0; i < sightseeing.length; i++) {
+		const marker = new google.maps.Marker({
+			name: sightseeing[i].name,
+			positon: {
+				lat: sightseeing[i].lat,
+				long: sightseeing[i].long,
+			},
+			map: map,
+		});
+		markers.push(marker);
+	}
 }
