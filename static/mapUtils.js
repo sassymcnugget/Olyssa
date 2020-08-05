@@ -1,3 +1,5 @@
+//const sightseeings = require("../controllers/sightseeings");
+
 //temporary array to contain map information
 let tripArray = [];
 
@@ -46,4 +48,21 @@ function addToTrip(place) {
 	tripPanel.appendChild(placeDiv);
 
 	tripArray.push(place);
+}
+
+// need to iterate over the array of sightseeings
+// get the sightseeings.lat ,  sightseeings.long  and place them as a Points on the map
+
+function addSightSeeingMarkers() {
+	for (i = 0; i < sightseeing.length; i++) {
+		const marker = new google.maps.Marker({
+			name: sightseeing[i].name,
+			positon: {
+				lat: sightseeing[i].lat,
+				long: sightseeing[i].long,
+			},
+			map: map,
+		});
+		markers.push(marker);
+	}
 }
