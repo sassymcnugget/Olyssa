@@ -9,6 +9,7 @@
     </script>
          <link rel="stylesheet" type="text/css" href="/styles/style.css" /> 
 		<script src="/app.js"></script>
+		<script src="/mapUtils.js"></script>
 		<script>
 			const longtitude = "<%- longtitude %>" //these variables are being passed from trips.js 'show' function 
 			const  lattitude = "<%- lattitude %>"
@@ -62,7 +63,9 @@
             <input type="hidden" name="tripId" value="<%=trip._id %>"/> 
 
             name : <input type="text" name="name" /><br/>
-            address : <input type="text" name="address" /><br/>
+			address : <input type="text" name="address" /><br/>
+			lng : <input type="text" name="lng" /><br/>
+			lat : <input type="text" name="lat" /><br/>
             img: <input type="text" name="img"><br/>
             <input type="submit" value="ADD SIGHTSEEING to your TRIP"/>
         </form>
@@ -73,8 +76,11 @@
             <% sightseeing.forEach((sightseeing, index)  => { %>
                 <ul>
                     <li>
+ 
                         <p> name : <%= sightseeing.name %> <br/> </p>
                         <p> address : <%= sightseeing.address %> <br/> </p>
+                        <p> lng : <%= sightseeing.lng %> <br/> </p>
+                        <p> lat : <%= sightseeing.lat %> <br/> </p>
                         <img src="<%=sightseeing.img%>" alt="Image" /> 
 
                         <!-- DELETE Button for Sightseeing -->

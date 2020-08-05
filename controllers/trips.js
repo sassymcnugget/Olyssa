@@ -37,7 +37,7 @@ const show = (req, res) => {
             if(err) {
                 res.send(err)
             } else {
-				console.log(foundTrip.sightseeing)
+				console.log("line 40" , foundTrip.sightseeing)
                 res.render('trips/show.ejs', {
                     trip: foundTrip, 
 					sightseeing: foundTrip.sightseeing,

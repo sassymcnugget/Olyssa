@@ -4,11 +4,8 @@ const mongoose = require("mongoose");
 const sightseeingSchema = new mongoose.Schema({
 	name: String,
 	address: String,
-	//!!!!!!!!! NOT sure if this supposed to be an array or an object 
-	// location: {
-	// 	latitude: Number, 
-	// 	longitude: Number 
-	// }, 
+	lng: Number, 
+	lat: Number,  
 	img: String
 	
 });
