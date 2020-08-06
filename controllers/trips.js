@@ -35,7 +35,6 @@ const show = (req, res) => {
 			if (err) {
 				res.send(err);
 			} else {
-				console.log("line 40", foundTrip.sightseeing);
 				res.render("trips/show.ejs", {
 					trip: foundTrip,
 					sightseeing: foundTrip.sightseeing,
@@ -46,7 +45,7 @@ const show = (req, res) => {
 		});
 };
 
-//WIP WIP WIP
+//Fetch data from the database into google api to render map and markers (GET request)
 const showData = (req, res) => {
 	Trip.findById(req.params.id)
 		.populate("sightseeing")
@@ -54,11 +53,29 @@ const showData = (req, res) => {
 			if (err) {
 				res.send(err);
 			} else {
-				console.log("line 40", foundTrip.sightseeing);
 				res.json({
 					trip: foundTrip,
 					sightseeing: foundTrip.sightseeing,
-					longtitude: foundTrip.lng, // longtitude, lattitude variables are being passed to app.js as hidden variables in show.ejs
+					longtitude: foundTrip.lng, 
+					lattitude: foundTrip.lat,
+				});
+			}
+		});
+};
+
+//copied this one 
+//POST data from the database into google api to render map and markers (GET request)
+const writeData = (req, res) => {
+	Trip.findById(req.params.id)
+		.populate("sightseeing")
+		.exec((err, foundTrip) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.json({
+					trip: foundTrip,
+					sightseeing: foundTrip.sightseeing,
+					longtitude: foundTrip.lng, 
 					lattitude: foundTrip.lat,
 				});
 			}

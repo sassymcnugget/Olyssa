@@ -40,7 +40,8 @@ async function initMap() {
 		infowindow.close();
 		let place = autocomplete.getPlace();
 		focusPlace(place);
-		addToTrip(place);
+		// addToTrip(place);
+		sightMarker(place)
 	});
 
 	await addSightSeeingMarkers();

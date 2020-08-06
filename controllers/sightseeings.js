@@ -1,5 +1,6 @@
 const Sightseeing = require("../models/sightseeings");
 const Trip = require("../models/trips");
+const { connect } = require("mongoose");
 
 ///Create a new sightseeing on Trips show page ('/trip/id')
 const create = async(req, res) => {
@@ -13,6 +14,24 @@ const create = async(req, res) => {
 			})
 		}) 	
 	}
+	catch (err){
+		console.log(err)  
+	}
+} 
+
+/// this fucntion will Post the data from Google API 
+const createGoogleApi = async(req, res) => {
+	console.log('line 24 req.body', req.body)
+	try{
+		const createdSight = await Sightseeing.create(req.body) 
+		Trip.findById(req.body.tripId, (err, updatedTrip) =>{
+			updatedTrip.sightseeing.push(createdSight)
+			updatedTrip.save((err, result) => {
+				res.redirect(`/trips/${ req.body.tripId }`)
+			})
+		}) 	
+	}
+
 	catch (err){
 		console.log(err)  
 	}
@@ -34,5 +53,6 @@ const deleteSight = async(req, res) => {
 
 module.exports = {
 	create,
-	deleteSight
+	deleteSight, 
+	createGoogleApi
 }
