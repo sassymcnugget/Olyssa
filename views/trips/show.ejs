@@ -82,23 +82,24 @@
 			<h5 class="m-0"><%= trip.address %></h5>
 			
 			<!-- DELETE TRIP  -->
-			<form class="d-flex flex-row-reverse" action="/trips/<%=trip._id %>?_method=DELETE" method="POST">
+			<!-- <form class="d-flex flex-row-reverse" action="/trips/<%=trip._id %>?_method=DELETE" method="POST">
 				<input class="delete-button" type="submit" value="Delete TRIP"/>
-			</form>
+			</form> -->
 		</div>
 
 			<% sightseeing.forEach((sightseeing, index)  => { %> 
 				<div class="card-bg grow" style="background-image: url('<%=sightseeing.img%>');">
-				
-					<p> <%= sightseeing.name %> <br/> </p>
-					<p><%= sightseeing.address %> <br/> </p>
-
+					<div d-flex flex-row>
+						<p> <%= sightseeing.name %> <br/> </p>
+						<p><%= sightseeing.address %> <br/> </p>
+					
 					<!-- DELETE Button for Sightseeing -->
 					<form class="d-flex flex-row-reverse" action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
 					<input class="delete-button" type="submit" value="Delete"/> 
 				</form>
 				<div class="sight-card" class="card p-2 rounded-0">
 				</div>
+			</div>
 				<br/>
 			</div>
 		
