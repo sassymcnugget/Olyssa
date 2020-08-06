@@ -6,14 +6,18 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: none;
 }
-/* the following is contained for the map */
-html,
 body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	display: flex;
 	overflow: hidden;
+	backface-visibility: hidden;
+	will-change: overflow;
 }
 #description {
 	font-family: Roboto;
@@ -85,58 +89,48 @@ body {
 }
 
 #navigation {
-	background: rgb(112, 71, 108);
+	width: 100%;
+	height: 100%;
+	background-color: rgb(112, 71, 108);
 	background: linear-gradient(
 		90deg,
 		rgba(112, 71, 108, 1) 0%,
 		rgba(171, 110, 134, 1) 56%,
 		rgba(73, 92, 198, 1) 100%
 	);
-	position: absolute;
-	top: 0;
-	height: 10%;
-	width: 100%;
-	text-align: center;
-	color: white;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: larger;
-}
-/* ul {
+	/* position: absolute;
+	top: 0; */
+	display: block;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 100%;
-	background-color: #2f9b32;
+	overflow: hidden;
 	color: white;
-} */
-/* 
-li a {
-	display: block;
-	color: #000;
-	padding: 8px 16px;
-	text-decoration: none; 
 }
 
-li {
-	display: block;
+#nav-button {
 	float: left;
-	color: white;
-}*/
-
-/* li a.active {
-	background-color: #4caf50;
-	color: white;
+	font-size: x-large;
 }
 
-li a:hover:not(.active) {
-	background-color: #39823b;
-	color: white;
+a,
+a:link,
+a:visited {
+	color: #fffafa;
+	text-decoration: none;
+	text-align: center;
+	align-content: center;
+	text-decoration: none;
+	font-size: x-large;
+	height: 100%;
+	object-fit: contain;
 }
 
-li a:hover {
-	background-color: #265528;
+#nav-bar {
+	text-align: center;
 	color: white;
-} */
+	align-content: center;
+}
 
 #sights {
 	height: 90%;
@@ -145,15 +139,16 @@ li a:hover {
 	bottom: 0;
 	left: 0;
 	background-color: rgb(180, 110, 152);
+	flex: 1;
 }
 
 #sights-header {
 	padding: 0;
 	text-align: center;
 	font-size: smaller;
-	line-height: 0.9 !important;
-	background-color: rgb(145, 87, 129);
-	color: rgb(29, 2, 25);
+	line-height: 0.9;
+	background-color: rgb(116, 70, 103);
+	color: white;
 	padding: 1%;
 }
 
@@ -167,23 +162,62 @@ li a:hover {
 	font-size: 16px;
 }
 
-.sight-card {
-	background-color: white;
-	margin: 1px;
+#sight-container {
+	overflow: scroll;
+	height: 90%;
 }
 
 .card-bg {
 	width: 100%;
-	height: 40%;
 	background-position: center;
-	background-color: rgb(116, 70, 103);
 	opacity: 100%;
-	object-fit: contain;
+	margin: 5px;
+	overflow: auto;
+	color: white;
+	box-shadow: inset 0 0 0 1000px rgba(116, 70, 103, 0.2);
+	background-color: rgba(255, 255, 255, 0);
+	padding: 0;
 }
 
-/* .grow {
-	transition: all 0.2s ease-in-out;
+.sight-card {
+	padding: 2%;
+	opacity: 100%;
+	color: white;
+	margin: 0%;
+	background-color: rgba(84, 32, 97, 0.4);
 }
-.grow:hover {
-	transform: scale(1.1);
-} */
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-button {
+	width: 67px;
+	height: 67px;
+}
+::-webkit-scrollbar-thumb {
+	background: #804461;
+	border: 0px none #ffffff;
+	border-radius: 56px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #7d4074;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #a4949f;
+}
+::-webkit-scrollbar-track {
+	background: #666666;
+	border: 30px none #ffffff;
+	border-radius: 15px;
+}
+::-webkit-scrollbar-track:hover {
+	background: #666666;
+}
+::-webkit-scrollbar-track:active {
+	background: #333333;
+}
+::-webkit-scrollbar-corner {
+	background: transparent;
+}

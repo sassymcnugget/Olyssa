@@ -1,66 +1,59 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Place Searches</title>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiTRmQpKXDj6e2BZMi0kOfqY7ZQTih8qs&callback=initMap&libraries=places&v=weekly"
+			defer
+		></script>
+		<link rel="stylesheet" type="text/css" href="/styles/style.css" />
 
-<head>
-	<title>Place Searches</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiTRmQpKXDj6e2BZMi0kOfqY7ZQTih8qs&callback=initMap&libraries=places&v=weekly"
-		defer >
-</script>
-	<link rel="stylesheet" type="text/css" href="/styles/style.css" />
+		<script>
+			const longtitude = "<%- longtitude %>"; //these variables are being passed from trips.js 'show' function
+			const lattitude = "<%- lattitude %>";
+			console.log(longtitude, lattitude);
+			const tripId = "<%- trip.id %>";
+		</script>
+
+		<script src="/mapUtils.js"></script>
+		<script src="/app.js"></script>
+
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+			integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+			crossorigin="anonymous"
+		/>
+
+		<!-- JS, Popper.js, and jQuery -->
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
+			integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<nav id="navigation">
+		<div class="nav-bar row col-sm">
+			<a href="/users/signup"> |  Sign Up  |  </a>
 	
-	<script>
-		const longtitude = "<%- longtitude %>"; //these variables are being passed from trips.js 'show' function 
-		const  lattitude = "<%- lattitude %>";
-		console.log(longtitude, lattitude);
-		const tripId = "<%- trip.id %>";
-	</script>
-
-	<script src="/mapUtils.js"></script>
-	<script src="/app.js"></script>
-
-	<!-- Bootstrap CSS -->
-	<link
-	rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
-	integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
-	crossorigin="anonymous"
-	/>
-
-	<!-- JS, Popper.js, and jQuery -->
-	<script
-		src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"
-	></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-		crossorigin="anonymous"
-	></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
-		integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
-		crossorigin="anonymous"
-	></script>
-
-</head>
-<body>
-	<nav id="navigation">
-		<div>
-			<a href="/users/signup"> Sign Up </a>
-		</div>
-		<div>
-				<a href="/users/logout"> Logout </a>
-		</div>
-		<div>
-				<a href="/trips"> Home </a>
-		</div>
-		<div>
-				<a href="/trips/new"> New Trip </a>
+				<a class="nav-button" href="/users/logout">   Logout  | </a> 
+				<a class="nav-button" href="/trips">   Home  | </a>
+				<a class="nav-button" href="/trips/new">   New Trip  | </a>
 				<main>
-				<section> 
+				<section class="nav-bar row col-sm"> 
 					<form action="/users/login" method="POST">
 						<div>
 						<label for="username "> Username: </label>
@@ -71,79 +64,86 @@
 							<input type="password" name="password">
 						</div>
 						<input type="submit" value="LOGIN">
-				</form>
+					</form>
 				</section>
 		</div>
 	</nav>
 
-	<div id="sights">
-		<div id="sights-header">
-			<h2 class="m-0"> Your trip to <%= trip.name %></h2>
-			<h5 class="m-0"><%= trip.address %></h5>
-			
-			<!-- DELETE TRIP  -->
-			<!-- <form class="d-flex flex-row-reverse" action="/trips/<%=trip._id %>?_method=DELETE" method="POST">
-				<input class="delete-button" type="submit" value="Delete TRIP"/>
-			</form> -->
+		<div id="sights">
+			<div id="sights-header">
+				<h2 class="m-0">Your trip to: <%= trip.name %></h2>
+				<h5 class="m-0"><%= trip.address %></h5>
+
+				<!-- DELETE TRIP  -->
+				<form
+					class="d-flex flex-row-reverse"
+					action="/trips/<%=trip._id %>?_method=DELETE"
+					method="POST"
+				>
+					<input class="delete-button" type="submit" value="Delete TRIP" />
+				</form>
+			</div>
+			<div id="sight-container">
+				<% sightseeing.forEach((sightseeing, index) => { %>
+				<div
+					class="card-bg card rounded-0"
+					style="background-image: url('<%=sightseeing.img%>');"
+				>
+					<div class="sight-card">
+						<h1><%= sightseeing.name %> <br /></h1>
+						<p><%= sightseeing.address %> <br /></p>
+
+						<!-- DELETE Button for Sightseeing -->
+						<form
+							class="d-flex flex-row-reverse"
+							action="/sightseeings/<%=sightseeing._id%>?_method=DELETE"
+							method="POST"
+						>
+							<input class="delete-button" type="submit" value="Delete" />
+						</form>
+					</div>
+				</div>
+				<% }) %>
+			</div>
 		</div>
 
-			<% sightseeing.forEach((sightseeing, index)  => { %> 
-				<div class="card-bg grow" style="background-image: url('<%=sightseeing.img%>');">
-					<div d-flex flex-row>
-						<p> <%= sightseeing.name %> <br/> </p>
-						<p><%= sightseeing.address %> <br/> </p>
-					
-					<!-- DELETE Button for Sightseeing -->
-					<form class="d-flex flex-row-reverse" action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
-					<input class="delete-button" type="submit" value="Delete"/> 
-				</form>
-				<div class="sight-card" class="card p-2 rounded-0">
+		<div class="pac-card" id="pac-card">
+			<div>
+				<div id="title">
+					Autocomplete search
+				</div>
+				<div id="type-selector" class="pac-controls">
+					<input
+						type="radio"
+						name="type"
+						id="changetype-all"
+						checked="checked"
+					/>
+					<label for="changetype-all">All</label>
+
+					<input type="radio" name="type" id="changetype-establishment" />
+					<label for="changetype-establishment">Establishments</label>
+
+					<input type="radio" name="type" id="changetype-address" />
+					<label for="changetype-address">Addresses</label>
+
+					<input type="radio" name="type" id="changetype-geocode" />
+					<label for="changetype-geocode">Geocodes</label>
+				</div>
+				<div id="strict-bounds-selector" class="pac-controls">
+					<input type="checkbox" id="use-strict-bounds" value="" />
+					<label for="use-strict-bounds">Strict Bounds</label>
 				</div>
 			</div>
-				<br/>
-			</div>
-		
-		<% }) %>
-	</div>
-
-	<div class="pac-card" id="pac-card">
-		<div>
-			<div id="title">
-				Autocomplete search
-			</div>
-			<div id="type-selector" class="pac-controls">
-				<input
-					type="radio"
-					name="type"
-					id="changetype-all"
-					checked="checked"
-				/>
-				<label for="changetype-all">All</label>
-
-				<input type="radio" name="type" id="changetype-establishment" />
-				<label for="changetype-establishment">Establishments</label>
-
-				<input type="radio" name="type" id="changetype-address" />
-				<label for="changetype-address">Addresses</label>
-
-				<input type="radio" name="type" id="changetype-geocode" />
-				<label for="changetype-geocode">Geocodes</label>
-			</div>
-			<div id="strict-bounds-selector" class="pac-controls">
-				<input type="checkbox" id="use-strict-bounds" value="" />
-				<label for="use-strict-bounds">Strict Bounds</label>
+			<div id="pac-container">
+				<input id="pac-input" type="text" placeholder="Enter a location" />
 			</div>
 		</div>
-		<div id="pac-container">
-			<input id="pac-input" type="text" placeholder="Enter a location" />
+		<div id="map"></div>
+		<div id="infowindow-content">
+			<img src="" width="16" height="16" id="place-icon" />
+			<span id="place-name" class="title"></span><br />
+			<span id="place-address"></span>
 		</div>
-	</div>
-	<div id="map"></div>
-	<div id="infowindow-content">
-		<img src="" width="16" height="16" id="place-icon" />
-		<span id="place-name" class="title"></span><br />
-		<span id="place-address"></span>
-	</div>
-</body>
-
+	</body>
 </html>
