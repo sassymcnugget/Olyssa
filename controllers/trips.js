@@ -23,6 +23,7 @@ const index = async (req, res) => {
 		console.log(req.session);
 		res.render("home.ejs", {
 			trips: allTrips,
+			currentUser: req.session.loggedIn
 		});
 	});
 };
@@ -40,6 +41,7 @@ const show = (req, res) => {
 					sightseeing: foundTrip.sightseeing,
 					longtitude: foundTrip.lng, // longtitude, lattitude variables are being passed to app.js as hidden variables in show.ejs
 					lattitude: foundTrip.lat,
+					currentUser: req.session.loggedIn
 				});
 			}
 		});
