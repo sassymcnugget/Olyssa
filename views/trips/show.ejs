@@ -87,39 +87,12 @@
 			</form>
 		</div>
 
-		<!-- Add the sightseeing for each city / trip  -->
-
-		<!-- <h1> Add new sightseeing for your selected TRIP </h1>
-		<br>
-		<form action="/sightseeings" method="POST">
-			passing a hidden value of trip.ID   -->
-			<!-- <input type="hidden" name="tripId" value="<%#=trip._id %>"/>  -->
-
-			<!-- name : <input type="text" name="name" /><br/>
-			address : <input type="text" name="address" /><br/>
-			lng : <input type="text" name="lng" /><br/>
-			lat : <input type="text" name="lat" /><br/>
-			img: <input type="text" name="img"><br/>
-			<input type="submit" value="ADD SIGHTSEEING to your TRIP"/>
-		</form>  -->
-		<!-- Display the sightseeings trip  -->
-		<!-- <section> -->
-		 <!-- <div> 
-		<div id="sights">
-			<div id="trip-panel"> 
-				
-				<div class="card p-2 rounded-0">test</div> 
-			 </div>
-		</div> -->
-
-		<!-- <h2>Checkout the list of sightseeings for <%#= trip.name %> </h2> -->
 			<% sightseeing.forEach((sightseeing, index)  => { %> 
 			
 				<div class="sight-card" class="card p-2 rounded-0" style="background-image: url('<%=sightseeing.img%>');">
 					<p> <%= sightseeing.name %> <br/> </p>
 					<p><%= sightseeing.address %> <br/> </p>
 					<!-- NEED TO ADD FUNCTIONALITY TO PULL INFO FROM GOOGLE -->
-					<!-- <p> lng : <%#= sightseeing.info %> <br/> </p> -->
 
 					<!-- DELETE Button for Sightseeing -->
 					<form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">

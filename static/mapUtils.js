@@ -38,21 +38,6 @@ function deleteMarkers() {
 	markers = [];
 }
 
-// function that allows us to add sights to trip
-// function addToTrip(place) {
-// 	let placeDiv = document.createElement("div");
-// 	placeDiv.innerHTML = place.name;
-// 	placeDiv.classList.add("card", "p-2", "rounded-0");
-
-// 	let tripPanel = document.querySelector("#trip-panel");
-// 	tripPanel.appendChild(placeDiv);
-
-// 	tripArray.push(place);
-// }
-
-// need to iterate over the array of sightseeings
-// get the sightseeings.lat ,  sightseeings.long  and place them as a Points on the map
-
 function addSightSeeingMarkers() {
 	return fetch("/trips/api/" + tripId)
 		.then((data) => {
@@ -75,14 +60,13 @@ function addSightSeeingMarkers() {
 		});
 }
 
-//new function
-//purpose saves sightseeings to database
 function sightMarker(place) {
 	console.log("Posting the data from place");
 	place.tripId = tripId;
 	let data = {
 		tripId: tripId,
 		name: place.name,
+		address: getAddressComponents(place),
 		lat: place.geometry.location.lat(),
 		lng: place.geometry.location.lng(),
 		img: place.photos[0].getUrl(),
@@ -90,18 +74,9 @@ function sightMarker(place) {
 	console.log("sightMarker Data: ", data);
 	fetch("/sightseeings/api/", {
 		method: "POST",
-		// mode: same-origin,
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data),
-		//post method
-		//body attribute (place)
-		//content type header (check docs)
 	});
-
-	// console.log(body)
-	// console.log(content)
-	// const content = response.json()
-	// return response.json()
 }

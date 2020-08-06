@@ -91,6 +91,19 @@ function focusPlace(place) {
 	}
 	let marker = addMarker(place.geometry.location);
 
+	let address = getAddressComponents(place);
+
+	infowindowContent.children["place-icon"].src = place.icon;
+	infowindowContent.children["place-name"].textContent = place.name;
+	infowindowContent.children["place-address"].textContent = address;
+	infowindow.open(map, marker);
+}
+
+function backgroundChange() {
+	document.body.style.backgroundImage = "url('img_tree.png')";
+}
+
+function getAddressComponents(place) {
 	let address = "";
 	if (place.address_components) {
 		address = [
@@ -102,13 +115,5 @@ function focusPlace(place) {
 				"",
 		].join(" ");
 	}
-
-	infowindowContent.children["place-icon"].src = place.icon;
-	infowindowContent.children["place-name"].textContent = place.name;
-	infowindowContent.children["place-address"].textContent = address;
-	infowindow.open(map, marker);
-}
-
-function backgroundChange() {
-	document.body.style.backgroundImage = "url('img_tree.png')";
+	return address;
 }
