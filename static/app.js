@@ -10,11 +10,6 @@ async function initMap() {
 		zoom: 13,
 	});
 
-	// map = new google.maps.Map(document.getElementById("map"), {
-	// 	center: { lat: 40, lng: 40 }, //these variables are being passed from trips.js 'show' function
-	// 	zoom: 13,
-	// });
-
 	let card = document.getElementById("pac-card");
 	let input = document.getElementById("pac-input");
 	let types = document.getElementById("type-selector");
@@ -30,7 +25,13 @@ async function initMap() {
 	autocomplete.bindTo("bounds", map);
 
 	// Set the data fields to return when the user selects a place.
-	autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+	autocomplete.setFields([
+		"address_components",
+		"geometry",
+		"icon",
+		"name",
+		"photos",
+	]);
 
 	infowindow = new google.maps.InfoWindow();
 	infowindowContent = document.getElementById("infowindow-content");
@@ -41,7 +42,7 @@ async function initMap() {
 		let place = autocomplete.getPlace();
 		focusPlace(place);
 		// addToTrip(place);
-		sightMarker(place)
+		sightMarker(place);
 	});
 
 	await addSightSeeingMarkers();
@@ -85,6 +86,19 @@ function focusPlace(place) {
 	}
 	let marker = addMarker(place.geometry.location);
 
+	let address = getAddressComponents(place);
+
+	infowindowContent.children["place-icon"].src = place.icon;
+	infowindowContent.children["place-name"].textContent = place.name;
+	infowindowContent.children["place-address"].textContent = address;
+	infowindow.open(map, marker);
+}
+
+function backgroundChange() {
+	document.body.style.backgroundImage = "url('img_tree.png')";
+}
+
+function getAddressComponents(place) {
 	let address = "";
 	if (place.address_components) {
 		address = [
@@ -96,9 +110,5 @@ function focusPlace(place) {
 				"",
 		].join(" ");
 	}
-
-	infowindowContent.children["place-icon"].src = place.icon;
-	infowindowContent.children["place-name"].textContent = place.name;
-	infowindowContent.children["place-address"].textContent = address;
-	infowindow.open(map, marker);
+	return address;
 }
