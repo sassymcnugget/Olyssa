@@ -88,16 +88,17 @@
 		</div>
 
 			<% sightseeing.forEach((sightseeing, index)  => { %> 
-			
-				<div class="sight-card" class="card p-2 rounded-0" style="background-image: url('<%=sightseeing.img%>');">
+				<div class="card-bg grow" style="background-image: url('<%=sightseeing.img%>');">
+				
 					<p> <%= sightseeing.name %> <br/> </p>
 					<p><%= sightseeing.address %> <br/> </p>
-					<!-- NEED TO ADD FUNCTIONALITY TO PULL INFO FROM GOOGLE -->
 
 					<!-- DELETE Button for Sightseeing -->
-					<form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
-					<input type="submit" value="Delete this sightseeing"/> 
+					<form class="d-flex flex-row-reverse" action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
+					<input class="delete-button" type="submit" value="Delete"/> 
 				</form>
+				<div class="sight-card" class="card p-2 rounded-0">
+				</div>
 				<br/>
 			</div>
 		

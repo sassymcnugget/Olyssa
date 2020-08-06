@@ -10,7 +10,6 @@ const create = async (req, res) => {
 	try {
 		console.log(req.body);
 		//create new var for whole object and see how you get it
-		// object.location = req.body.latitude
 		const createdTrip = await Trip.create(req.body, (err, createdTrip) => {
 			console.log(createdTrip);
 			console.log(req.body);

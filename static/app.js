@@ -10,11 +10,6 @@ async function initMap() {
 		zoom: 13,
 	});
 
-	// map = new google.maps.Map(document.getElementById("map"), {
-	// 	center: { lat: 40, lng: 40 }, //these variables are being passed from trips.js 'show' function
-	// 	zoom: 13,
-	// });
-
 	let card = document.getElementById("pac-card");
 	let input = document.getElementById("pac-input");
 	let types = document.getElementById("type-selector");
