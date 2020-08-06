@@ -8,7 +8,7 @@ const sightseeingSchema = new mongoose.Schema({
 	lat: Number,  
 	img: String
 	
-});
+})
 
 const Sightseeing = mongoose.model("Sightseeing", sightseeingSchema);
 

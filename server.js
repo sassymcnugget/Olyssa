@@ -36,6 +36,7 @@ app.use(methodOverride("_method"));
 
 // parse incoming data into a JS object attached to the request
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
 // set location from which to pull static files
 app.use(express.static("static"));
