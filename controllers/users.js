@@ -1,12 +1,35 @@
 const User = require("../models/users");
 
 
-const login  = (req, res) => {
-    req.session.username = req.body.username 
-    req.session.loggedIn = true 
-    console.log(req.session)
-    res.redirect('/trips')
-} 
+// const login  = (req, res) => {
+//     req.session.username = req.body.username 
+//     req.session.loggedIn = true 
+//     console.log(req.session)
+//     res.redirect('/trips')
+// } 
+
+const login = async (req, res) =>{
+    try{
+        
+        await User.findOne({'username': req.body.username }, (err, foundUser) => {
+            if (!foundUser){
+                return res.redirect('/users/signup')
+                req.session.loggedIn = false 
+            } 
+            if (foundUser.password.toString() === req.body.password.toString() && foundUser.username.toString() === req.body.username.toString() ){
+                req.session.loggedIn = true 
+                return res.redirect('/trips')
+            }
+            else{
+                req.session.loggedIn = false 
+                return res.redirect('/trips')
+            }
+        })
+    }
+    catch (err) {
+        res.redirect('/users/signup')
+    }  
+}
 
 //destroy the seesion when user click on 'logout' link 
 const logout = (req, res) => {
