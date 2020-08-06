@@ -7,7 +7,7 @@
 	bottom: 0;
 	right: 0;
 }
-/* Optional: Makes the sample page fill the window. */
+/* the following is contained for the map */
 html,
 body {
 	height: 100%;
@@ -74,6 +74,7 @@ body {
 	border-color: #4d90fe;
 }
 
+/* navigation */
 #title {
 	color: #fff;
 	background-color: #4d90fe;
@@ -83,7 +84,13 @@ body {
 }
 
 #navigation {
-	background-color: green;
+	background: rgb(112, 71, 108);
+	background: linear-gradient(
+		90deg,
+		rgba(112, 71, 108, 1) 0%,
+		rgba(171, 110, 134, 1) 56%,
+		rgba(73, 92, 198, 1) 100%
+	);
 	position: absolute;
 	top: 0;
 	height: 10%;
@@ -93,29 +100,29 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: larger;
 }
-ul {
+/* ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	width: 100%;
 	background-color: #2f9b32;
 	color: white;
-}
-
+} */
+/* 
 li a {
 	display: block;
 	color: #000;
 	padding: 8px 16px;
-	text-decoration: none;
+	text-decoration: none; 
 }
 
 li {
 	display: block;
 	float: left;
 	color: white;
-}
+}*/
 
-li a.active {
+/* li a.active {
 	background-color: #4caf50;
 	color: white;
 }
@@ -128,7 +135,7 @@ li a:hover:not(.active) {
 li a:hover {
 	background-color: #265528;
 	color: white;
-}
+} */
 
 #sights {
 	height: 90%;
@@ -136,5 +143,31 @@ li a:hover {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	background-color: rgb(174, 57, 96);
+	background-color: rgb(180, 110, 152);
+}
+
+#sights-header {
+	padding: 0;
+	text-align: center;
+	font-size: smaller;
+	line-height: 0.9 !important;
+	background-color: rgb(145, 87, 129);
+	color: rgb(29, 2, 25);
+	padding: 1%;
+}
+
+.delete-button {
+	background-color: rgb(81, 31, 61);
+	border: none;
+	color: white;
+	padding: 3px 10px;
+	text-align: center;
+	text-decoration: none;
+	/* display: inline-block; */
+	font-size: 16px;
+}
+
+.sight-card {
+	background-color: white;
+	margin: 1px;
 }

@@ -78,29 +78,27 @@ function addSightSeeingMarkers() {
 //new function
 //purpose saves sightseeings to database
 function sightMarker(place) {
-	console.log("Posting the data from place" )
-	place.tripId = tripId
-	debugger; 
+	console.log("Posting the data from place");
+	place.tripId = tripId;
 	let data = {
 		tripId: tripId,
 		name: place.name,
 		lat: place.geometry.location.lat(),
 		lng: place.geometry.location.lng(),
-		// image: 
-
-	}
-	console.log(data)
+		img: place.photos[0].getUrl(),
+	};
+	console.log("sightMarker Data: ", data);
 	fetch("/sightseeings/api/", {
-		method: 'POST', 
+		method: "POST",
 		// mode: same-origin,
 		headers: {
-			'Content-Type': 'application/json'
-				  },
-		body: JSON.stringify(data)
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
 		//post method
 		//body attribute (place)
 		//content type header (check docs)
-	}) 
+	});
 
 	// console.log(body)
 	// console.log(content)

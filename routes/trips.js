@@ -14,7 +14,7 @@ router.get("/", tripController.index);
 //SHOW ROUTE - send a single fruit in the response
 router.get("/:id", tripController.show);
 
-//WIP ROUTE - send a single fruit in the response
+//API ROUTE - send a single fruit in the response
 router.get("/api/:id", tripController.showData);
 
 //DELETE ROUTE - remove a single fruit from the array and redirect the user to index
