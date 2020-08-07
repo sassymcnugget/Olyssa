@@ -42,7 +42,15 @@
 
 ---
 
-##### Screenshot(s) (optional)
+##### 
+
+Register page 
+![Register](/static/images/sign-up.png?raw=true "Register")
+Homepage 
+![homepage](/static/images/homepage.png?raw=true)
+Landing page 
+![homepage](/static/images/landing-page.png?raw=true)
+
 
 
 
