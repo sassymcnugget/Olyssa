@@ -56,7 +56,10 @@ function addSightSeeingMarkers() {
 					map: map,
 				});
 				markers.push(marker);
+				allMarkersBounds.extend(marker.position);
 			}
+
+			map.fitBounds(allMarkersBounds);
 		});
 }
 
