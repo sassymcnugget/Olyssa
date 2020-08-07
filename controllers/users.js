@@ -6,10 +6,7 @@ const login = async (req, res) => {
 			if (!foundUser) {
 				req.session.loggedIn = false;
                 return res.redirect("/users/signup");
-<<<<<<< HEAD
-=======
-                
->>>>>>> 82cbeacff3383e6768d9a962f5710e60ace4265a
+
 			}
 			if (
 				foundUser.password.toString() === req.body.password.toString() &&
