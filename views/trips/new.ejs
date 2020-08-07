@@ -41,30 +41,48 @@
 				<!-- <div><img id="logo" src="https://64.media.tumblr.com/ebd8916cb73ff5f4106cdc8b5717506f/56c78ea55897421b-ea/s640x960/f54aa6401496517562233c7d6921c73c443b9a49.png" alt="logo"></div> -->
 			</div>
 		</nav>
-		<div id="new-holder" class="m-5 text-white">
+		<div id="new-holder" class="text-white">
 			<h1 style="text-align: center;">Your new trip</h1>
-			<form class="form-group" action="/trips" method="post">
-				name :
-				<input class="form-control opacity-50p" type="text" name="name" /><br />
-				address :
-				<input
-					class="form-control opacity-50p"
-					type="text"
-					name="address"
-				/><br />
-				lat:
-				<input class="form-control opacity-50p" type="text" name="lat" /><br />
-				long:
-				<input class="form-control opacity-50p" type="text" name="lng" /><br />
+			<div class="m-5">
+				<form class="form-group" action="/trips" method="post">
+					name :
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="name"
+					/><br />
+					address :
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="address"
+					/><br />
+					lat:
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="lat"
+					/><br />
+					long:
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="lng"
+					/><br />
 
-				img:
-				<input class="form-control opacity-50p" type="text" name="img" /><br />
-				<input
-					class="delete-button form-control"
-					type="submit"
-					value="CREATE TRIP"
-				/>
-			</form>
+					img:
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="img"
+					/><br />
+					<input
+						class="delete-button form-control"
+						type="submit"
+						value="CREATE TRIP"
+					/>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

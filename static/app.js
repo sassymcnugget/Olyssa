@@ -1,5 +1,6 @@
 let map;
 let markers = [];
+let allMarkersBounds;
 
 let infoWindow;
 let infowindowContent;
@@ -18,6 +19,8 @@ async function initMap() {
 	if (currentUser) {
 		map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 	}
+
+	allMarkersBounds = new google.maps.LatLngBounds();
 
 	let autocomplete = new google.maps.places.Autocomplete(input);
 
