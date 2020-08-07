@@ -38,34 +38,36 @@
 				<%- include('../partials/_nav') %>
 			</div>
 		</nav>
-		<div id="new-holder" class="m-5 text-white">
+		<div id="new-holder" class="text-white">
 			<h1 style="text-align: center;">Register</h1>
-			<form class="form-group" action="/users/signup" method="post">
-				username :
-				<input
-					class="form-control opacity-50p"
-					type="text"
-					name="username"
-				/><br />
-				email :
-				<input
-					class="form-control opacity-50p"
-					type="text"
-					name="email"
-				/><br />
-				password:
-				<input
-					class="form-control opacity-50p"
-					type="text"
-					name="password"
-				/><br />
+			<div>
+				<form class="form-group" action="/users/signup" method="post">
+					username :
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="username"
+					/><br />
+					email :
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="email"
+					/><br />
+					password:
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="password"
+					/><br />
 
-				<input
-					class="delete-button form-control"
-					type="submit"
-					value="Register"
-				/>
-			</form>
+					<input
+						class="delete-button form-control"
+						type="submit"
+						value="Register"
+					/>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
