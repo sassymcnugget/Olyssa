@@ -15,8 +15,9 @@ async function initMap() {
 	let types = document.getElementById("type-selector");
 	let strictBounds = document.getElementById("strict-bounds-selector");
 
-
+	if (currentUser) {
 	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+	}
 	
 	let autocomplete = new google.maps.places.Autocomplete(input);
 
@@ -33,7 +34,6 @@ async function initMap() {
 		"name",
 		"photos",
 	]);
-
 	
 
 

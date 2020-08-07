@@ -55,8 +55,8 @@ app.use("/trips", tripsRouter);
 const sightseeingsRouter = require("./routes/sightseeings.js");
 app.use("/sightseeings", sightseeingsRouter);
 
-const mapRouter = require("./routes/map.js");
-app.use("/map", mapRouter);
+// const mapRouter = require("./routes/map.js");
+// app.use("/map", mapRouter);
 
 const userRouter = require("./routes/users.js");
 app.use("/users", userRouter);
