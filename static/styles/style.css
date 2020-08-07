@@ -10,11 +10,10 @@
 	-webkit-overflow-scrolling: touch;
 	-ms-overflow-style: none;
 }
-body {
+.static-body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	display: flex;
 	overflow: hidden;
 	backface-visibility: hidden;
 	will-change: overflow;
@@ -106,6 +105,7 @@ body {
 	padding: 0;
 	overflow: hidden;
 	color: white;
+	padding-bottom: 2%;
 }
 
 #nav-button {
@@ -115,7 +115,8 @@ body {
 
 a,
 a:link,
-a:visited {
+a:visited,
+a:hover {
 	color: #fffafa;
 	text-decoration: none;
 	text-align: center;
@@ -163,6 +164,11 @@ a:visited {
 }
 
 #sight-container {
+	overflow: scroll;
+	height: 90%;
+}
+
+#trip-container {
 	overflow: scroll;
 	height: 90%;
 }
