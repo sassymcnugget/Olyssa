@@ -3,14 +3,19 @@ const Sightseeing = require("../models/sightseeings");
 
 //Path to '/trips/new/'
 const newOne = (req, res) => {
-	res.render("trips/new.ejs");
+	res.render("trips/new.ejs",{
+		currentUser: req.session.loggedIn
+	});
 };
 
 //create and save trip at '/trips/new/'
 const createTrip = async (req, res) => {
 	try {
 		const createdTrip = await Trip.create(req.body, (err, createdTrip) => {
-			res.redirect("/trips");
+			res.redirect("/trips",{
+				currentUser: req.session.loggedIn
+			})
+			
 		});
 	} catch (err) {
 		console.log(err);
