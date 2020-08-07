@@ -1,55 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body> 
-    <h1> Show page for TRIPS </h1>
-    <p> name : <%= trip.name %> <br/> </p>
-    <p> address : <%= trip.address %> <br/> </p>
-    <p> latitude : <%= trip.latitude %> <br/> </p>
-    <p> longitude : <%= trip.longitude %> <br/> </p>
-    <img src="<%=trip.img%>" alt="Image" />
+<html>
+	<head>
+		<title>Place Searches</title>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiTRmQpKXDj6e2BZMi0kOfqY7ZQTih8qs&callback=initMap&libraries=places&v=weekly"
+			defer
+		></script>
+		<link rel="stylesheet" type="text/css" href="/styles/style.css" />
 
-     <!-- DELETE TRIP  -->
-     <form action="/trips/<%=trip._id %>?_method=DELETE" method="POST">
-     <input type="submit" value="Delete TRIP"/> </form>
-   
-    <!-- Add the sightseeing for each city / trip  -->
+		<script>
+			const longtitude = "<%- longtitude %>"; //these variables are being passed from trips.js 'show' function
+			const lattitude = "<%- lattitude %>";
+			const tripId = "<%- trip.id %>";
+			const currentUser = "<%- currentUser %>";
+		</script>
 
-        <h1> Add new sightseeing for your selected TRIP </h1>
-        <br>
-        <form action="/sightseeings" method="POST">
-            <!-- passing a hidden value of trip.ID   -->
-            <input type="hidden" name="tripId" value="<%=trip._id %>"/> 
+		<script src="/mapUtils.js"></script>
+		<script src="/app.js"></script>
 
-            name : <input type="text" name="name" /><br/>
-            address : <input type="text" name="address" /><br/>
-            img: <input type="text" name="img"><br/>
-            <input type="submit" value="ADD SIGHTSEEING to your TRIP"/>
-        </form>
-        <!-- Display the sightseeings trip  -->
-        <section>
-        <div>
-            <h2>Checkout the list of sightseeings for <%= trip.name %> </h2>
-            <% sightseeing.forEach((sightseeing, index)  => { %>
-                <ul>
-                    <li>
-                        <p> name : <%= sightseeing.name %> <br/> </p>
-                        <p> address : <%= sightseeing.address %> <br/> </p>
-                        <img src="<%=sightseeing.img%>" alt="Image" />
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+			integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
+			crossorigin="anonymous"
+		/>
 
-                        <!-- DELETE Button for Sightseeing -->
-                        <form action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
-                        <input type="submit" value="Delete this sightseeing"/> 
-                    </form>
-                    <br/>
-                    </li>
-                </ul>
-            <% }) %>
-        </div>
-    </section>
-</body>
+		<!-- JS, Popper.js, and jQuery -->
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
+			integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body class="static-body">
+		<%- include('../partials/_nav') %>
+
+		<div id="sights">
+			<div id="sights-header">
+				<h2 class="m-0">Your trip to: <%= trip.name %></h2>
+				<h5 class="m-0"><%= trip.address %></h5>
+
+				<!-- DELETE TRIP  -->
+				<form
+					class="d-flex flex-row-reverse"
+					action="/trips/<%=trip._id %>?_method=DELETE"
+					method="POST"
+				>
+					<input class="delete-button" type="submit" value="Delete TRIP" />
+				</form>
+			</div>
+
+			<div id="sight-container">
+				<% sightseeing.forEach((sightseeing, index) => { %>
+				<div
+					class="card-bg card rounded-0"
+					style="background-image: url('<%=sightseeing.img%>');"
+				>
+					<div class="sight-card">
+						<h1><%= sightseeing.name %> <br /></h1>
+						<p><%= sightseeing.address %> <br /></p>
+
+						<!-- DELETE Button for Sightseeing -->
+						<% if (currentUser) { %>
+
+						<form
+							class="d-flex flex-row-reverse"
+							action="/sightseeings/<%=sightseeing._id%>?_method=DELETE"
+							method="POST"
+						>
+							<input class="delete-button" type="submit" value="Delete" />
+						</form>
+						<% } %>
+					</div>
+				</div>
+				<% }) %>
+			</div>
+		</div>
+
+		<div class="pac-card" id="pac-card">
+			<div>
+				<div id="title">
+					Search
+				</div>
+				<div id="type-selector" class="pac-controls">
+					<input
+						type="radio"
+						name="type"
+						id="changetype-all"
+						checked="checked"
+					/>
+					<label for="changetype-all">All</label>
+
+					<input type="radio" name="type" id="changetype-establishment" />
+					<label for="changetype-establishment">Establishments</label>
+
+					<input type="radio" name="type" id="changetype-address" />
+					<label for="changetype-address">Addresses</label>
+
+					<input type="radio" name="type" id="changetype-geocode" />
+					<label for="changetype-geocode">Geocodes</label>
+				</div>
+				<div id="strict-bounds-selector" class="pac-controls">
+					<input type="checkbox" id="use-strict-bounds" value="" />
+					<label for="use-strict-bounds">Strict Bounds</label>
+				</div>
+			</div>
+			<div id="pac-container">
+				<input id="pac-input" type="text" placeholder="Enter a location" />
+			</div>
+		</div>
+		<div id="map"></div>
+		<div id="infowindow-content">
+			<img src="" width="16" height="16" id="place-icon" />
+			<span id="place-name" class="title"></span><br />
+			<span id="place-address"></span>
+		</div>
+	</body>
 </html>

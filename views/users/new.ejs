@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
+		<meta charset="utf-8" />
+
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
@@ -32,23 +34,40 @@
 	</head>
 	<body id="home-body">
 		<nav id="navigation">
-			<%- include('./partials/_nav') %>
-		</nav>
-
-		<div id="trip-container">
-			<% trips.forEach((trip, index) => { %>
-			<div
-				class="card-bg card rounded-0"
-				style="background-image: url('<%=trip.img%>');"
-			>
-				<a class="text-white" href="/trips/<%=trip._id%>">
-					<div class="trip-card">
-						<h1><%= trip.name %> <br /></h1>
-						<p><%= trip.address %> <br /></p>
-					</div>
-				</a>
+			<div class="">
+				<%- include('../partials/_nav') %>
 			</div>
-			<% }) %>
+		</nav>
+		<div id="new-holder" class="text-white">
+			<h1 style="text-align: center;">Register</h1>
+			<div>
+				<form class="form-group" action="/users/signup" method="post">
+					username :
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="username"
+					/><br />
+					email :
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="email"
+					/><br />
+					password:
+					<input
+						class="form-control opacity-50p"
+						type="text"
+						name="password"
+					/><br />
+
+					<input
+						class="delete-button form-control"
+						type="submit"
+						value="Register"
+					/>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
