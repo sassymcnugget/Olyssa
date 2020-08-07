@@ -12,9 +12,9 @@ const newOne = (req, res) => {
 const createTrip = async (req, res) => {
 	try {
 		const createdTrip = await Trip.create(req.body, (err, createdTrip) => {
-			res.redirect("/trips",{
-				currentUser: req.session.loggedIn
-			})
+			res.redirect("/trips"
+				// currentUser: req.session.loggedIn
+			)
 		});
 	} catch (err) {
 		console.log(err);
