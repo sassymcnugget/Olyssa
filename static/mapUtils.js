@@ -77,6 +77,9 @@ function sightMarker(place) {
 		headers: {
 			"Content-Type": "application/json",
 		},
+		//reloads page with new marker placed
 		body: JSON.stringify(data),
+	}).then((response) => {
+		window.location.reload();
 	});
 }

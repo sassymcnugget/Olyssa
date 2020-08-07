@@ -9,7 +9,6 @@
 		></script>
 		<link rel="stylesheet" type="text/css" href="/styles/style.css" />
 
-
 		<script>
 			const longtitude = "<%- longtitude %>"; //these variables are being passed from trips.js 'show' function
 			const lattitude = "<%- lattitude %>";
@@ -27,7 +26,6 @@
 			integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
 			crossorigin="anonymous"
 		/>
-
 
 		<!-- JS, Popper.js, and jQuery -->
 		<script
@@ -47,19 +45,7 @@
 		></script>
 	</head>
 	<body class="static-body">
-  
-  	<%- include('../partials/_nav') %> 
-    
-		<nav id="navigation">
-		<div class="nav-bar row col-sm">
-			<!-- <div><img id="logo" src="https://64.media.tumblr.com/ebd8916cb73ff5f4106cdc8b5717506f/56c78ea55897421b-ea/s640x960/f54aa6401496517562233c7d6921c73c443b9a49.png" alt="logo"></div> -->
-			<a href="/users/signup"> |  Sign Up  |  </a>
-				<a class="nav-button" href="/users/logout">     Logout  | </a> 
-				<a class="nav-button" href="/trips">   Home  | </a>
-				<a class="nav-button" href="/trips/new">   New Trip  | </a>
-				<main>
-		</div>
-	</nav>
+		<%- include('../partials/_nav') %>
 
 		<div id="sights">
 			<div id="sights-header">
@@ -73,7 +59,6 @@
 					method="POST"
 				>
 					<input class="delete-button" type="submit" value="Delete TRIP" />
-
 				</form>
 			</div>
 
@@ -89,14 +74,15 @@
 
 						<!-- DELETE Button for Sightseeing -->
 						<% if (currentUser) { %>
-							
-						<form 
-						class="d-flex flex-row-reverse" 
-						action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" 
-						method="POST">
-						<input class="delete-button" type="submit" value="Delete"/> 
-						<% } %>
 
+						<form
+							class="d-flex flex-row-reverse"
+							action="/sightseeings/<%=sightseeing._id%>?_method=DELETE"
+							method="POST"
+						>
+							<input class="delete-button" type="submit" value="Delete" />
+						</form>
+						<% } %>
 					</div>
 				</div>
 				<% }) %>
@@ -106,7 +92,7 @@
 		<div class="pac-card" id="pac-card">
 			<div>
 				<div id="title">
-					Autocomplete search
+					Search
 				</div>
 				<div id="type-selector" class="pac-controls">
 					<input

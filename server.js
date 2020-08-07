@@ -1,17 +1,16 @@
 //require statements
-const express = require("express")
-const mongoose = require("mongoose")
-const ejsLayouts = require('express-ejs-layouts')
-const methodOverride = require("method-override")
-const session = require("express-session")
-require('dotenv').config()
-
+const express = require("express");
+const mongoose = require("mongoose");
+const ejsLayouts = require("express-ejs-layouts");
+const methodOverride = require("method-override");
+const session = require("express-session");
+require("dotenv").config();
 
 const app = express();
 
 // database connection
-const connectionString = process.env.MONGO_URI
-	
+const connectionString = process.env.MONGO_URI;
+
 mongoose.connect(connectionString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -28,7 +27,7 @@ mongoose.connection.on("disconnected", () =>
 mongoose.connection.on("error", (err) => console.log("Mongoose error", err));
 
 //middleware
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 //User session
 app.use(
