@@ -15,6 +15,7 @@
 		const  lattitude = "<%- lattitude %>";
 		console.log(longtitude, lattitude);
 		const tripId = "<%- trip.id %>";
+		const currentUser = "<%- currentUser %>";
 	</script>
 
 	<script src="/mapUtils.js"></script>
@@ -47,36 +48,10 @@
 
 </head>
 <body>
-	<nav id="navigation">
-		<div>
-			<a href="/users/signup"> Sign Up </a>
-		</div>
-		<div>
-				<a href="/users/logout"> Logout </a>
-		</div>
-		<div>
-				<a href="/trips"> Home </a>
-		</div>
-		<div>
-				<a href="/trips/new"> New Trip </a>
-				<main>
-				<section> 
-					<form action="/users/login" method="POST">
-						<div>
-						<label for="username "> Username: </label>
-							<input type="text" name="username">
-						</div>
-						<div>
-							<label for="password "> Password: </label>
-							<input type="password" name="password">
-						</div>
-						<input type="submit" value="LOGIN">
-				</form>
-				</section>
-		</div>
-	</nav>
-
-	<div id="sights">
+	<%- include('../partials/_nav') %> 
+	
+	
+		<div id="sights">
 		<div id="sights-header">
 			<h2 class="m-0"> Your trip to <%= trip.name %></h2>
 			<h5 class="m-0"><%= trip.address %></h5>
@@ -93,9 +68,11 @@
 						<p> <%= sightseeing.name %> <br/> </p>
 						<p><%= sightseeing.address %> <br/> </p>
 					
-					<!-- DELETE Button for Sightseeing -->
-					<form class="d-flex flex-row-reverse" action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
-					<input class="delete-button" type="submit" value="Delete"/> 
+						<% if (currentUser) { %>
+							<!-- DELETE Button for Sightseeing -->
+						<form class="d-flex flex-row-reverse" action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" method="POST">
+						<input class="delete-button" type="submit" value="Delete"/> 
+						<% } %>
 				</form>
 				<div class="sight-card" class="card p-2 rounded-0">
 				</div>
@@ -105,7 +82,6 @@
 		
 		<% }) %>
 	</div>
-
 	<div class="pac-card" id="pac-card">
 		<div>
 			<div id="title">

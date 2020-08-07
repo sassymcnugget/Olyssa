@@ -1,14 +1,17 @@
 //require statements
-const express = require("express");
-const mongoose = require("mongoose");
-const methodOverride = require("method-override");
-const session = require("express-session");
+const express = require("express")
+const mongoose = require("mongoose")
+const ejsLayouts = require('express-ejs-layouts')
+const methodOverride = require("method-override")
+const session = require("express-session")
+require('dotenv').config()
+
+
 const app = express();
 
 // database connection
-const connectionString =
-	"mongodb+srv://olb:olga22@cluster0.wif1u.mongodb.net/olyssa?retryWrites=true&w=majority";
-
+const connectionString = process.env.MONGO_URI
+	
 mongoose.connect(connectionString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -25,10 +28,12 @@ mongoose.connection.on("disconnected", () =>
 mongoose.connection.on("error", (err) => console.log("Mongoose error", err));
 
 //middleware
+app.set('view engine', 'ejs');
+
 //User session
 app.use(
 	session({
-		secret: "Olyssa",
+		secret: process.env.SECRET,
 		resave: false,
 		saveUninitialized: false,
 	})
@@ -57,6 +62,6 @@ const userRouter = require("./routes/users.js");
 app.use("/users", userRouter);
 
 // listening
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
 	console.log("I'm listening!");
 });
