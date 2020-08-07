@@ -3,8 +3,8 @@ const Sightseeing = require("../models/sightseeings");
 
 //Path to '/trips/new/'
 const newOne = (req, res) => {
-	res.render("trips/new.ejs",{
-		currentUser: req.session.loggedIn
+	res.render("trips/new.ejs", {
+		currentUser: req.session.loggedIn,
 	});
 };
 
@@ -12,9 +12,7 @@ const newOne = (req, res) => {
 const createTrip = async (req, res) => {
 	try {
 		const createdTrip = await Trip.create(req.body, (err, createdTrip) => {
-			res.redirect("/trips"
-				// currentUser: req.session.loggedIn
-			)
+			res.redirect("/trips");
 		});
 	} catch (err) {
 		console.log(err);
@@ -27,7 +25,7 @@ const index = async (req, res) => {
 		console.log(req.session);
 		res.render("home.ejs", {
 			trips: allTrips,
-			currentUser: req.session.loggedIn
+			currentUser: req.session.loggedIn,
 		});
 	});
 };
@@ -45,7 +43,7 @@ const show = (req, res) => {
 					sightseeing: foundTrip.sightseeing,
 					longtitude: foundTrip.lng, // longtitude, lattitude variables are being passed to app.js as hidden variables in show.ejs
 					lattitude: foundTrip.lat,
-					currentUser: req.session.loggedIn
+					currentUser: req.session.loggedIn,
 				});
 			}
 		});
@@ -62,14 +60,14 @@ const showData = (req, res) => {
 				res.json({
 					trip: foundTrip,
 					sightseeing: foundTrip.sightseeing,
-					longtitude: foundTrip.lng, 
+					longtitude: foundTrip.lng,
 					lattitude: foundTrip.lat,
 				});
 			}
 		});
 };
 
-//copied this one 
+//copied this one
 //POST data from the database into google api to render map and markers (GET request)
 const writeData = (req, res) => {
 	Trip.findById(req.params.id)
@@ -81,7 +79,7 @@ const writeData = (req, res) => {
 				res.json({
 					trip: foundTrip,
 					sightseeing: foundTrip.sightseeing,
-					longtitude: foundTrip.lng, 
+					longtitude: foundTrip.lng,
 					lattitude: foundTrip.lat,
 				});
 			}
