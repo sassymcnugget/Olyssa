@@ -37,10 +37,9 @@ const logout = (req, res) => {
 
 //Path to '/users/signup/'
 const newUser = (req, res) => {
-	// res.render("users/new.ejs", {
-	// 	currentUser: req.session.loggedIn,
-	// });
-	res.render("users/new.ejs");
+	res.render("users/new.ejs", {
+		currentUser: req.session.loggedIn,
+	});
 };
 
 //create and save user '/users/signup'
