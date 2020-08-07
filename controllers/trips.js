@@ -3,14 +3,19 @@ const Sightseeing = require("../models/sightseeings");
 
 //Path to '/trips/new/'
 const newOne = (req, res) => {
-	res.render("trips/new.ejs");
+	res.render("trips/new.ejs",{
+		currentUser: req.session.loggedIn
+	});
 };
 
 //create and save trip at '/trips/new/'
 const createTrip = async (req, res) => {
 	try {
 		const createdTrip = await Trip.create(req.body, (err, createdTrip) => {
-			res.redirect("/trips");
+			res.redirect("/trips",{
+				currentUser: req.session.loggedIn
+			})
+			
 		});
 	} catch (err) {
 		console.log(err);
@@ -23,6 +28,7 @@ const index = async (req, res) => {
 		console.log(req.session);
 		res.render("home.ejs", {
 			trips: allTrips,
+			currentUser: req.session.loggedIn
 		});
 	});
 };
@@ -40,6 +46,7 @@ const show = (req, res) => {
 					sightseeing: foundTrip.sightseeing,
 					longtitude: foundTrip.lng, // longtitude, lattitude variables are being passed to app.js as hidden variables in show.ejs
 					lattitude: foundTrip.lat,
+					currentUser: req.session.loggedIn
 				});
 			}
 		});

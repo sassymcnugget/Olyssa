@@ -15,8 +15,9 @@ async function initMap() {
 	let types = document.getElementById("type-selector");
 	let strictBounds = document.getElementById("strict-bounds-selector");
 
-	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
+	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+	
 	let autocomplete = new google.maps.places.Autocomplete(input);
 
 	// Bind the map's bounds (viewport) property to the autocomplete object,
@@ -33,16 +34,20 @@ async function initMap() {
 		"photos",
 	]);
 
+	
+
+
 	infowindow = new google.maps.InfoWindow();
 	infowindowContent = document.getElementById("infowindow-content");
 	infowindow.setContent(infowindowContent);
 
+
 	autocomplete.addListener("place_changed", function () {
-		infowindow.close();
-		let place = autocomplete.getPlace();
-		focusPlace(place);
-		// addToTrip(place);
-		sightMarker(place);
+	infowindow.close();
+	let place = autocomplete.getPlace();
+	focusPlace(place);
+	// addToTrip(place);
+	sightMarker(place);
 	});
 
 	await addSightSeeingMarkers();

@@ -9,6 +9,7 @@
 		></script>
 		<link rel="stylesheet" type="text/css" href="/styles/style.css" />
 
+
 		<script>
 			const longtitude = "<%- longtitude %>"; //these variables are being passed from trips.js 'show' function
 			const lattitude = "<%- lattitude %>";
@@ -26,6 +27,7 @@
 			integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX"
 			crossorigin="anonymous"
 		/>
+
 
 		<!-- JS, Popper.js, and jQuery -->
 		<script
@@ -45,6 +47,9 @@
 		></script>
 	</head>
 	<body class="static-body">
+  
+  	<%- include('../partials/_nav') %> 
+    
 		<nav id="navigation">
 		<div class="nav-bar row col-sm">
 			<!-- <div><img id="logo" src="https://64.media.tumblr.com/ebd8916cb73ff5f4106cdc8b5717506f/56c78ea55897421b-ea/s640x960/f54aa6401496517562233c7d6921c73c443b9a49.png" alt="logo"></div> -->
@@ -68,8 +73,10 @@
 					method="POST"
 				>
 					<input class="delete-button" type="submit" value="Delete TRIP" />
+
 				</form>
 			</div>
+
 			<div id="sight-container">
 				<% sightseeing.forEach((sightseeing, index) => { %>
 				<div
