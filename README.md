@@ -42,7 +42,11 @@
 
 ---
 
-##### Screenshot(s) (optional)
+##### 
+
+Register page 
+![Alt text](/ststatic/images/sign-up1.png?raw=true "Register")
+
 
 
 
