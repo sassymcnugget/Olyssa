@@ -45,9 +45,12 @@
 ##### 
 
 Register page 
-![Alt text](/static/images/sign-up1.png?raw=true "Register")
-![Register](/static/images/sign-up1.png?raw=true)
-![Register](/static/images/sign-up1.png?)
+![Register](/static/images/sign-up.png?raw=true "Register")
+Homepage 
+![homepage](/static/images/homepage.png?raw=true)
+Landing page 
+![homepage](/static/images/landing-page.png?raw=true)
+
 
 
 
