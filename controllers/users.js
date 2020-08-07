@@ -23,7 +23,7 @@ const login = async (req, res) => {
 	}
 };
 
-//destroy the seesion when user click on 'logout' link
+//destroy the seesion when user click on link
 const logout = (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
