@@ -13,8 +13,8 @@
 		<script>
 			const longtitude = "<%- longtitude %>"; //these variables are being passed from trips.js 'show' function
 			const lattitude = "<%- lattitude %>";
-			console.log(longtitude, lattitude);
 			const tripId = "<%- trip.id %>";
+			const currentUser = "<%- currentUser %>";
 		</script>
 
 		<script src="/mapUtils.js"></script>
@@ -88,13 +88,15 @@
 						<p><%= sightseeing.address %> <br /></p>
 
 						<!-- DELETE Button for Sightseeing -->
-						<form
-							class="d-flex flex-row-reverse"
-							action="/sightseeings/<%=sightseeing._id%>?_method=DELETE"
-							method="POST"
-						>
-							<input class="delete-button" type="submit" value="Delete" />
-						</form>
+						<% if (currentUser) { %>
+							
+						<form 
+						class="d-flex flex-row-reverse" 
+						action="/sightseeings/<%=sightseeing._id%>?_method=DELETE" 
+						method="POST">
+						<input class="delete-button" type="submit" value="Delete"/> 
+						<% } %>
+
 					</div>
 				</div>
 				<% }) %>

@@ -15,7 +15,6 @@ const login = async (req, res) =>{
             if (!foundUser){
                 req.session.loggedIn = false 
                 return res.redirect('/users/signup')
-                
             } 
             if (foundUser.password.toString() === req.body.password.toString() && foundUser.username.toString() === req.body.username.toString() ){
                 req.session.loggedIn = true 
@@ -46,7 +45,7 @@ const logout = (req, res) => {
 
 //Path to '/users/signup/'
 const newUser = (req, res) => {
-	res.render("users/new.ejs")
+    res.render("users/new.ejs")
 }
 
 //create and save user '/users/signup'

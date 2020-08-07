@@ -15,7 +15,6 @@ const createTrip = async (req, res) => {
 			res.redirect("/trips",{
 				currentUser: req.session.loggedIn
 			})
-			
 		});
 	} catch (err) {
 		console.log(err);
