@@ -18,6 +18,8 @@ mongoose.connect(connectionString, {
 	useFindAndModify: false,
 });
 
+// mongoose.connect( process.env.MONGODB_URI || "YOUR CURRENT LOCALHOST DB CONNECTION STRING HERE" );
+
 mongoose.connection.on("connected", () =>
 	console.log(`Mongoose connected to ${connectionString}`)
 );
@@ -61,6 +63,4 @@ const userRouter = require("./routes/users.js");
 app.use("/users", userRouter);
 
 // listening
-app.listen(process.env.PORT, () => {
-	console.log("I'm listening!");
-});
+app.listen(process.env.PORT || 3000) 

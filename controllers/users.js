@@ -5,14 +5,15 @@ const login = async (req, res) => {
 		await User.findOne({ username: req.body.username }, (err, foundUser) => {
 			if (!foundUser) {
 				req.session.loggedIn = false;
-				return res.redirect("/users/signup");
+                return res.redirect("/users/signup");
 			}
 			if (
 				foundUser.password.toString() === req.body.password.toString() &&
 				foundUser.username.toString() === req.body.username.toString()
 			) {
 				req.session.loggedIn = true;
-				return res.redirect("/trips");
+                return res.redirect("/trips");
+                
 			} else {
 				req.session.loggedIn = false;
 				return res.redirect("/trips");
