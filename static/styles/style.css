@@ -18,6 +18,11 @@
 	backface-visibility: hidden;
 	will-change: overflow;
 }
+
+#home-body {
+	background-color: rgb(180, 110, 152);
+}
+
 #description {
 	font-family: Roboto;
 	font-size: 15px;
@@ -127,6 +132,23 @@ a:hover {
 	object-fit: contain;
 }
 
+link,
+link:visited,
+link:hover {
+	color: #fffafa;
+	text-decoration: none;
+	text-align: center;
+	align-content: center;
+	text-decoration: none;
+	font-size: xx-large;
+	height: 100%;
+	object-fit: contain;
+}
+
+#logo {
+	height: 60px;
+}
+
 #nav-bar {
 	text-align: center;
 	color: white;
@@ -169,8 +191,11 @@ a:hover {
 }
 
 #trip-container {
-	overflow: scroll;
 	height: 90%;
+	width: 90%;
+	margin: 1%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .card-bg {
@@ -185,12 +210,30 @@ a:hover {
 	padding: 0;
 }
 
+.trip-card {
+	padding: 2%;
+	opacity: 100%;
+	color: white;
+	margin: 0%;
+	background-color: rgba(123, 46, 114, 0.4);
+}
+
 .sight-card {
 	padding: 2%;
 	opacity: 100%;
 	color: white;
 	margin: 0%;
-	background-color: rgba(84, 32, 97, 0.4);
+	background-color: rgba(123, 46, 114, 0.4);
+}
+
+.opacity-50p {
+	opacity: 50%;
+}
+
+#new-holder {
+	align-self: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* Scrollbar Styling */
