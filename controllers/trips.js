@@ -67,25 +67,6 @@ const showData = (req, res) => {
 		});
 };
 
-//copied this one
-//POST data from the database into google api to render map and markers (GET request)
-const writeData = (req, res) => {
-	Trip.findById(req.params.id)
-		.populate("sightseeing")
-		.exec((err, foundTrip) => {
-			if (err) {
-				res.send(err);
-			} else {
-				res.json({
-					trip: foundTrip,
-					sightseeing: foundTrip.sightseeing,
-					longtitude: foundTrip.lng,
-					lattitude: foundTrip.lat,
-				});
-			}
-		});
-};
-
 // Delete Trip on show page
 const removeTrip = async (req, res) => {
 	try {
