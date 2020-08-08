@@ -64,7 +64,6 @@ function addSightSeeingMarkers() {
 }
 
 function sightMarker(place) {
-	console.log("Posting the data from place");
 	place.tripId = tripId;
 	let data = {
 		tripId: tripId,
@@ -74,7 +73,6 @@ function sightMarker(place) {
 		lng: place.geometry.location.lng(),
 		img: place.photos[0].getUrl(),
 	};
-	console.log("sightMarker Data: ", data);
 	fetch("/sightseeings/api/", {
 		method: "POST",
 		headers: {

@@ -38,10 +38,17 @@ https://fierce-hamlet-84545.herokuapp.com/trips/
 4. Add logo to every page 
 5. Update sightseeings with information pulled from Google 
 6. User is kept on the same page when logs in 
-7. Add the functionality to create new trip by converting the address to coordinates 
+7. Add the functionality to create new trip by geocoding the address to geographical coordinates 
 
 ---
 
 ##### Screenshot(s) (optional)
+
+Register page 
+![Register](/static/images/sign-up.png?raw=true "Register")
+Homepage 
+![homepage](/static/images/homepage.png?raw=true)
+Landing page 
+![homepage](/static/images/landing-page.png?raw=true)
 
 
