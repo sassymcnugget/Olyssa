@@ -32,13 +32,14 @@ https://fierce-hamlet-84545.herokuapp.com/trips/
 
 ## Planned Features
 
-1. Add password encryption 
+1. Add password encryption with Password
 2. On page refresh Google map zooms to show all sightseeings pins 
 3. Create an about page 
 4. Add logo to every page 
 5. Update sightseeings with information pulled from Google 
 6. User is kept on the same page when logs in 
 7. Add the functionality to create new trip by geocoding the address to geographical coordinates 
+
 
 ---
 

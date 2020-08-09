@@ -36,6 +36,7 @@ mongoose.connection.on("error", (err) => console.log("Mongoose error", err));
 //middleware
 app.set("view engine", "ejs");
 
+
 //User session
 app.use(
 	session({
@@ -48,7 +49,8 @@ app.use(
 app.use(methodOverride("_method"));
 
 // parse incoming data into a JS object attached to the request
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // set location from which to pull static files
