@@ -39,7 +39,7 @@ https://fierce-hamlet-84545.herokuapp.com/trips/
 5. Update sightseeings with information pulled from Google 
 6. User is kept on the same page when logs in 
 7. Add the functionality to create new trip by geocoding the address to geographical coordinates 
-8. Display errors when incorrect information provided during registration (name exsist, not give name or password) 
+8. Display errors when incorrect information provided during registration (name exists, not give name or password)
 
 ---
 
