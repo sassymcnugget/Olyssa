@@ -1,31 +1,14 @@
 const User = require("../models/users");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose"); 
+const router = require("../routes/trips");
 
-const login = async (req, res) => {
-	try {
-		await User.findOne({ username: req.body.username }, (err, foundUser) => {
-			if (!foundUser) {
-				req.session.loggedIn = false;
-                return res.redirect("/users/signup");
+//read and encode data from the session 
+passport.serializeUser(User.serializeUser()); 
+passport.deserializeUser(User.deserializeUser());
+passport.use(new localStrategy(User.authenticate()));
 
-			}
-			if (
-				foundUser.password.toString() === req.body.password.toString() &&
-				foundUser.username.toString() === req.body.username.toString()
-			) {
-				req.session.loggedIn = true;
-                return res.redirect("/trips");
-                
-			} else {
-				req.session.loggedIn = false;
-				return res.redirect("/trips");
-			}
-		});
-	} catch (err) {
-		res.redirect("/users/signup");
-	}
-};
-
-//destroy the seesion when user click on link
+// destroy the seesion when user click on link
 const logout = (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
@@ -40,24 +23,32 @@ const logout = (req, res) => {
 //Path to '/users/signup/'
 const newUser = (req, res) => {
 	res.render("users/new.ejs", {
-		currentUser: req.session.loggedIn,
-	});
+		currentUser: req.user
+	})
 };
 
-//create and save user '/users/signup'
-const createUser = async (req, res) => {
-	try {
-		const createUser = await User.create(req.body, (err, createdUser) => {
-			res.redirect("/trips");
-		});
-	} catch (err) {
-		console.log(err);
-	}
-};
+
+//create User with Passport  
+const createUser = (req, res) => {
+	req.body.username
+	req.body.email
+	req.body.password
+	User.register( new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user){
+		if(err){
+			console.log(err)
+			return res.render("users/new.ejs",{
+				currentUser: req.user
+
+			})
+		}
+		passport.authenticate("local")(req, res, function(){
+			res.redirect("/trips")
+		})
+	}	
+)};
 
 module.exports = {
-	login,
 	logout,
 	newUser,
-	createUser,
+	createUser
 };

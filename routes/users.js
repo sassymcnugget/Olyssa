@@ -7,8 +7,12 @@ router.get('/logout', userController.logout)
 
 router.get('/signup', userController.newUser)
 
+// router.post('/signup', userController.createUser)
 router.post('/signup', userController.createUser)
+router.post('/login', passport.authenticate('local', { 
+                                   successRedirect: '/trips',
+                                   failureRedirect: '/users/signup' }));
 
-router.post('/login', userController.login)
+// router.post('/login', userController.login)
 
 module.exports = router 
