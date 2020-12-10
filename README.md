@@ -21,10 +21,10 @@ https://fierce-hamlet-84545.herokuapp.com/trips/
   * Features to delete and add sightseeings are available with UI elements and Google Map`s autocomplete functionality 
   * Unauthenticated user has access to review trips and sightseeings but can't add and delete sightseeings 
   
-2. Trips collection is available through homepage scrollable panel  
+2. Trips collection is available through homepage scrollable panel: 
   * User can click on the Trip and will be redirected to landing page with associated sightseeings 
   
-3. Landing page is supported by Google Map UI interface 
+3. Landing page is supported by Google Map UI interface:
   * Google Map displays based on coordinates associated with Trip 
   * Sightseeings display as pins on the map, located by coordinates saved in MongoDB
 
@@ -40,8 +40,6 @@ https://fierce-hamlet-84545.herokuapp.com/trips/
 7. Display errors when incorrect information provided during registration (name exists, not give name or password)
 ---
 
-Register page 
-![Register](/static/images/sign-up.png?raw=true "Register")
 Homepage 
 ![homepage](/static/images/homepage.png?raw=true)
 Landing page 
