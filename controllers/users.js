@@ -8,7 +8,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 passport.use(new localStrategy(User.authenticate()));
 
-// destroy the seesion when user click on link
+// destroy the session when user loggs ut
 const logout = (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
@@ -20,13 +20,11 @@ const logout = (req, res) => {
 	});
 };
 
-//Path to '/users/signup/'
 const newUser = (req, res) => {
 	res.render("users/new.ejs", {
 		currentUser: req.user
 	})
 };
-
 
 //create User with Passport  
 const createUser = (req, res) => {
